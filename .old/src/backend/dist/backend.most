@@ -1,0 +1,116 @@
+// Version: 4.0.0
+type AccessControlState__204832294 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__175655829<Principal, UserRole__256279894>
+  };
+type ApprovalStatus__982498703 = {#approved; #pending; #rejected};
+type Data__1012705489<T> = {var count : Nat__565224867; elements : [var ?T]};
+type Data__1061330525<K, V> =
+  {var count : Nat__565224867; kvs : [var ?(K, V)]};
+type Internal__1027873607<T> =
+  {children : [var ?Node__467501754<T>]; data : Data__1012705489<T>};
+type Internal__1060388275<K, V> =
+  {children : [var ?Node__1010487028<K, V>]; data : Data__1061330525<K, V>};
+type Leaf__537180585<T> = {data : Data__1012705489<T>};
+type Leaf__8515789<K, V> = {data : Data__1061330525<K, V>};
+type Map__175655829<K, V> = Map__975833162<K, V>;
+type Map__925935234<K, V> =
+  {var root : Node__1010487028<K, V>; var size : Nat__565224867};
+type Map__975833162<K, V> = Map__925935234<K, V>;
+type Nat__565224867 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__769816496 =
+  {
+    accessControlState : AccessControlState__204832294;
+    approvalState : UserApprovalState__266451338;
+    seededUsers : Set__1052680779<Principal>;
+    taskCounter : {var nextId : Nat};
+    tasks : Map__175655829<Nat, Task__337074598>
+  };
+type NewActor__866383623 =
+  {
+    sampleState : {var seeded : Bool};
+    tasks : Map__175655829<Nat, Task__492821452>
+  };
+type Node__1010487028<K, V> =
+  {#internal : Internal__1060388275<K, V>; #leaf : Leaf__8515789<K, V>};
+type Node__467501754<T> =
+  {#internal : Internal__1027873607<T>; #leaf : Leaf__537180585<T>};
+type OldActor__512397517 = {};
+type OldActor__523825548 =
+  {
+    seededUsers : Set__1052680779<Principal>;
+    tasks : Map__175655829<Nat, Task__492821452>
+  };
+type Priority__1007458524 = {#high; #low; #medium};
+type Priority__695711595 = {#high; #low; #medium};
+type Priority__962004928 = {#high; #low; #medium};
+type Set__1052680779<T> = Set__753738869<T>;
+type Set__753738869<T> =
+  {var root : Node__467501754<T>; var size : Nat__565224867};
+type TaskId__207642484 = Nat;
+type Task__337074598 =
+  {
+    completed : Bool;
+    completedAt : ?Int;
+    createdAt : Int;
+    date : ?Text;
+    id : Nat;
+    note : ?Text;
+    owner : Principal;
+    priority : Priority__1007458524;
+    title : Text
+  };
+type Task__431803600 =
+  {
+    completed : Bool;
+    completedAt : ?Timestamp__301639476;
+    createdAt : Timestamp__301639476;
+    date : ?Text;
+    id : TaskId__207642484;
+    note : ?Text;
+    owner : UserId__158757552;
+    priority : Priority__695711595;
+    title : Text
+  };
+type Task__492821452 =
+  {
+    completed : Bool;
+    completedAt : ?Int;
+    createdAt : Int;
+    date : ?Text;
+    id : Nat;
+    note : ?Text;
+    owner : Principal;
+    priority : Priority__962004928;
+    title : Text
+  };
+type Timestamp__301639476 = Int;
+type UserApprovalState__266451338 =
+  {var approvalStatus : Map__175655829<Principal, ApprovalStatus__982498703>};
+type UserId__158757552 = Principal;
+type UserRole__256279894 = {#admin; #guest; #user};
+{
+  "00000000_000000" : OldActor__512397517 -> NewActor__769816496;
+  "20261122_120000" : (old : OldActor__523825548) -> NewActor__866383623
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__175655829<Principal, UserRole__256279894>
+    };
+  stable approvalState :
+    {
+      var approvalStatus :
+        Map__175655829<Principal, ApprovalStatus__982498703>
+    };
+  stable sampleState : {var seeded : Bool};
+  stable taskCounter : {var nextId : Nat};
+  stable tasks :
+    {
+      var root : Node__1010487028<TaskId__207642484, Task__431803600>;
+      var size : Nat__565224867
+    }
+};

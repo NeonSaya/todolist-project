@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "trace-1",
+  "createdAt": "2026-11-22T10:47:14.210Z",
+  "payload": {
+    "actions": [
+      {
+        "name": "tap",
+        "summary": "tap button \"清除配置\"",
+        "target": {
+          "role": "button",
+          "name": "清除配置"
+        }
+      },
+      {
+        "name": "tap",
+        "summary": "tap button \"确认清除\"",
+        "target": {
+          "role": "button",
+          "name": "确认清除"
+        }
+      }
+    ],
+    "executor": {
+      "name": "e2e-default-agent",
+      "version": "2"
+    },
+    "recordedFor": {
+      "testId": "ai-settings.e2e.ts::ai-settings",
+      "targetId": "web",
+      "instructionDigest": "0ae5430a236938582cfa20a0e72c5444acde58f398f985def241c38b6c70db1d",
+      "paramsDigest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "callIndex": 0,
+      "agent": "default"
+    },
+    "recordedBy": {
+      "provider": "anthropic.messages",
+      "model": "claude-opus-5-5"
+    },
+    "summary": "I pressed 清除配置, and a dialog titled \"清除 AI 配置？\" opened. I pressed 确认清除 to confirm. A toast now reads \"已清除 AI 配置\", meaning the AI configuration was cleared.",
+    "startPath": "/settings",
+    "endPath": "/settings",
+    "endAnchors": [
+      {
+        "text": "未配置"
+      },
+      {
+        "text": "尚未配置 API Key"
+      },
+      {
+        "text": "https://api.openai.com/v1 · gpt-4o-mini"
+      },
+      {
+        "role": "textbox",
+        "name": "接口地址",
+        "placeholder": "https://api.openai.com/v1",
+        "value": "https://api.openai.com/v1"
+      },
+      {
+        "role": "textbox",
+        "name": "模型名称",
+        "placeholder": "gpt-4o-mini",
+        "value": "gpt-4o-mini"
+      },
+      {
+        "text": "填写 API Key 后可测试连接"
+      },
+      {
+        "role": "link",
+        "name": "AI 设置 未配置"
+      }
+    ],
+    "goneAnchors": [
+      {
+        "text": "已连接"
+      },
+      {
+        "text": "智能添加已就绪"
+      },
+      {
+        "text": "https://api.example.com/v1 · test-model"
+      },
+      {
+        "role": "textbox",
+        "name": "接口地址",
+        "placeholder": "https://api.openai.com/v1",
+        "value": "https://api.example.com/v1"
+      },
+      {
+        "role": "textbox",
+        "name": "模型名称",
+        "placeholder": "gpt-4o-mini",
+        "value": "test-model"
+      },
+      {
+        "role": "link",
+        "name": "AI 设置 已连接"
+      }
+    ],
+    "endWaitMs": 13098,
+    "keyedBy": {
+      "cacheSchema": "trace-1",
+      "policyVersion": "conservative/6",
+      "project": "403fcccf39e2650a7e389bda5a9246bfe8c725769a98b3a749be67a096c16423",
+      "platform": "web",
+      "engineName": "web",
+      "engineSpiVersion": 1,
+      "appIdentity": "aec5acc8a8d7ba14d388c35095196d67ae7ad7199ff1168a3230addcf190cf8d",
+      "agentContextDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

@@ -1,0 +1,131 @@
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type UserId = principal;
+type UserApprovalInfo = 
+ record {
+   "principal": principal;
+   status: ApprovalStatus;
+ };
+type Timestamp = int;
+type TaskInput = 
+ record {
+   date: opt text;
+   note: opt text;
+   priority: Priority;
+   title: text;
+ };
+type TaskId = nat;
+type TaskError = 
+ variant {
+   invalidInput: text;
+   notFound;
+ };
+type Task = 
+ record {
+   completed: bool;
+   completedAt: opt Timestamp;
+   createdAt: Timestamp;
+   date: opt text;
+   id: TaskId;
+   note: opt text;
+   owner: UserId;
+   priority: Priority;
+   title: text;
+ };
+type Result__1 = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type Result_2 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result_1 = 
+ variant {
+   err: TaskError;
+   ok: vec Task;
+ };
+type Result = 
+ variant {
+   err: TaskError;
+   ok: Task;
+ };
+type Priority = 
+ variant {
+   high;
+   low;
+   medium;
+ };
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type ApprovalStatus = 
+ variant {
+   approved;
+   pending;
+   rejected;
+ };
+service : {
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result_2);
+  _internet_identity_sign_in_start: () -> (blob);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  createTask: (title: text, priority: Priority, date: opt text, note:
+   opt text) -> (Result);
+  createTasks: (inputs: vec TaskInput) -> (Result_1);
+  deleteTask: (id: TaskId) -> (bool);
+  ensureSampleTasks: (today: text) -> (vec Task);
+  execute: (qJson: text) -> (Result__1) query;
+  getApiDoc: () -> (text) query;
+  getCallerUserRole: () -> (UserRole) query;
+  isCallerAdmin: () -> (bool) query;
+  isCallerApproved: () -> (bool) query;
+  listApprovals: () -> (vec UserApprovalInfo) query;
+  listTasks: () -> (vec Task) query;
+  removeApproval: (user: principal) -> ();
+  requestApproval: () -> ();
+  schema: () -> (text) query;
+  setApproval: (user: principal, status: ApprovalStatus) -> ();
+  setTaskCompleted: (id: TaskId, completed: bool) -> (Result);
+  updateTask: (id: TaskId, title: text, priority: Priority, date: opt text,
+   note: opt text) -> (Result);
+}

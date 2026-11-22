@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "trace-1",
+  "createdAt": "2026-11-22T10:20:52.709Z",
+  "payload": {
+    "actions": [
+      {
+        "name": "type",
+        "summary": "type \"缴电费\" into textbox \"新任务标题\"",
+        "target": {
+          "role": "textbox",
+          "name": "新任务标题",
+          "placeholder": "添加新任务，按 Enter 创建…"
+        },
+        "value": "缴电费"
+      },
+      {
+        "name": "tap",
+        "summary": "tap button \"日期：无日期\"",
+        "target": {
+          "role": "button",
+          "name": "日期：无日期"
+        }
+      },
+      {
+        "name": "tool",
+        "summary": "tool type (run-time value)",
+        "derived": "date"
+      },
+      {
+        "name": "tap",
+        "summary": "tap button \"添加\"",
+        "target": {
+          "role": "button",
+          "name": "添加"
+        }
+      }
+    ],
+    "executor": {
+      "name": "e2e-default-agent",
+      "version": "2"
+    },
+    "recordedFor": {
+      "testId": "dated-views.e2e.ts::dated-views",
+      "targetId": "web",
+      "instructionDigest": "46fdbd7fa33ca745ba1188d0d8eb8005819a02ec6de9a9bbb7dd5d41419a77f1",
+      "paramsDigest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "callIndex": 0,
+      "agent": "default"
+    },
+    "recordedBy": {
+      "provider": "anthropic.messages",
+      "model": "claude-opus-5-5"
+    },
+    "summary": "I added the task 缴电费 dated yesterday (11月21日 周六). It now appears in the 已逾期 list as \"已逾期 · 昨天\", and the app showed the message 已添加任务. The sidebar now reads 已逾期 2 and 全部 9.",
+    "startPath": "/?view=overdue",
+    "endPath": "/?view=overdue",
+    "endAnchors": [
+      {
+        "text": "2 项"
+      },
+      {
+        "text": "缴电费"
+      },
+      {
+        "text": "中优先"
+      },
+      {
+        "text": "已逾期 · 昨天"
+      },
+      {
+        "role": "button",
+        "name": "编辑：缴电费"
+      },
+      {
+        "role": "button",
+        "name": "删除：缴电费"
+      },
+      {
+        "role": "link",
+        "name": "已逾期 2"
+      },
+      {
+        "role": "link",
+        "name": "全部 9"
+      }
+    ],
+    "goneAnchors": [
+      {
+        "text": "1 项"
+      },
+      {
+        "role": "link",
+        "name": "已逾期 1"
+      },
+      {
+        "role": "link",
+        "name": "全部 8"
+      }
+    ],
+    "endWaitMs": 15605,
+    "keyedBy": {
+      "cacheSchema": "trace-1",
+      "policyVersion": "conservative/6",
+      "project": "403fcccf39e2650a7e389bda5a9246bfe8c725769a98b3a749be67a096c16423",
+      "platform": "web",
+      "engineName": "web",
+      "engineSpiVersion": 1,
+      "appIdentity": "aec5acc8a8d7ba14d388c35095196d67ae7ad7199ff1168a3230addcf190cf8d",
+      "agentContextDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

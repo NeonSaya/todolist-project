@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "spec": {
+    "id": "second-user-pending",
+    "kind": "interactive",
+    "goal": "A visitor opening the app uses the shared task list directly and can add to it",
+    "requirementIndexes": [],
+    "acceptanceCriteriaIndexes": [],
+    "steps": [
+      "Open the 全部 view",
+      "Add a task titled 共享清单任务 using the quick add form"
+    ],
+    "checks": [
+      {
+        "afterStep": 0,
+        "expectRole": {
+          "role": "heading",
+          "name": "全部"
+        }
+      },
+      {
+        "afterStep": 1,
+        "expectText": "共享清单任务"
+      }
+    ]
+  }
+}

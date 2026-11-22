@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "trace-1",
+  "createdAt": "2026-11-22T10:50:22.107Z",
+  "payload": {
+    "actions": [
+      {
+        "name": "type",
+        "summary": "type \"交房租\" into textbox \"新任务标题\"",
+        "target": {
+          "role": "textbox",
+          "name": "新任务标题",
+          "placeholder": "添加任务，按 Enter 创建…"
+        },
+        "value": "交房租"
+      },
+      {
+        "name": "tap",
+        "summary": "tap button \"日期：11月23日 周一\"",
+        "target": {
+          "role": "button",
+          "name": "日期：11月23日 周一"
+        }
+      },
+      {
+        "name": "tap",
+        "summary": "tap button \"明天 11-23\" in \"快速选择\"",
+        "target": {
+          "role": "button",
+          "name": "明天 11-23",
+          "within": "快速选择"
+        }
+      },
+      {
+        "name": "tap",
+        "summary": "tap button \"添加\"",
+        "target": {
+          "role": "button",
+          "name": "添加"
+        }
+      }
+    ],
+    "executor": {
+      "name": "e2e-default-agent",
+      "version": "2"
+    },
+    "recordedFor": {
+      "testId": "dated-views.e2e.ts::dated-views",
+      "targetId": "web",
+      "instructionDigest": "d93edd830f46076294a96419727a980cc9d5825c40cce4369060171b8467e361",
+      "paramsDigest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "callIndex": 0,
+      "agent": "default"
+    },
+    "recordedBy": {
+      "provider": "anthropic.messages",
+      "model": "claude-opus-5-5"
+    },
+    "summary": "I added the task 交房租 with the date set to 明天 (11月23日 周一). It now shows under the 11月23日 周一 group, which reads \"明天 · 2 项\", and a toast confirmed \"已添加任务 交房租\". The 即将到来 count went up to 6.",
+    "startPath": "/?view=upcoming",
+    "endPath": "/?view=upcoming",
+    "endAnchors": [
+      {
+        "text": "6 项"
+      },
+      {
+        "text": "明天 · 2 项"
+      },
+      {
+        "text": "交房租"
+      },
+      {
+        "role": "button",
+        "name": "编辑：交房租"
+      },
+      {
+        "role": "button",
+        "name": "删除：交房租"
+      },
+      {
+        "role": "link",
+        "name": "即将到来 6"
+      },
+      {
+        "role": "link",
+        "name": "全部 11"
+      },
+      {
+        "role": "heading",
+        "name": "11月23日 周一 明天 · 2 项",
+        "text": "11月23日 周一"
+      }
+    ],
+    "goneAnchors": [
+      {
+        "text": "5 项"
+      },
+      {
+        "text": "明天 · 1 项"
+      },
+      {
+        "role": "link",
+        "name": "即将到来 5"
+      },
+      {
+        "role": "link",
+        "name": "全部 10"
+      },
+      {
+        "role": "heading",
+        "name": "11月23日 周一 明天 · 1 项",
+        "text": "11月23日 周一"
+      }
+    ],
+    "endWaitMs": 15126,
+    "keyedBy": {
+      "cacheSchema": "trace-1",
+      "policyVersion": "conservative/6",
+      "project": "403fcccf39e2650a7e389bda5a9246bfe8c725769a98b3a749be67a096c16423",
+      "platform": "web",
+      "engineName": "web",
+      "engineSpiVersion": 1,
+      "appIdentity": "aec5acc8a8d7ba14d388c35095196d67ae7ad7199ff1168a3230addcf190cf8d",
+      "agentContextDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

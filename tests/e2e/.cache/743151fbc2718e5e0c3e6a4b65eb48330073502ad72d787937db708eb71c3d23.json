@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "trace-1",
+  "createdAt": "2026-11-22T10:19:44.440Z",
+  "payload": {
+    "actions": [
+      {
+        "name": "tap",
+        "summary": "tap button \"标记为完成：买牛奶\" in \"买牛奶\"",
+        "target": {
+          "role": "button",
+          "name": "标记为完成：买牛奶",
+          "within": "买牛奶"
+        }
+      }
+    ],
+    "executor": {
+      "name": "e2e-default-agent",
+      "version": "2"
+    },
+    "recordedFor": {
+      "testId": "task-lifecycle.e2e.ts::task-lifecycle",
+      "targetId": "web",
+      "instructionDigest": "9cff2d8b8e91c9b4afb1bc0c4568d7d1106448806d40b944f9f00b93382fa8a3",
+      "paramsDigest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "callIndex": 0,
+      "agent": "default"
+    },
+    "recordedBy": {
+      "provider": "anthropic.messages",
+      "model": "claude-opus-5-5"
+    },
+    "summary": "I ticked the checkbox for 买牛奶 and it is now marked 已完成 (complete): its checkbox reads 标记为未完成 (\"mark as not complete\") and is pressed. The 已完成 count went from 1 to 2, and today's progress now shows 1 / 4 (25%).",
+    "startPath": "/?view=today",
+    "endPath": "/?view=today",
+    "endAnchors": [
+      {
+        "text": "1 / 4"
+      },
+      {
+        "text": "还剩 3 项待完成"
+      },
+      {
+        "text": "25%"
+      },
+      {
+        "role": "button",
+        "name": "标记为未完成：买牛奶",
+        "states": [
+          "pressed"
+        ]
+      },
+      {
+        "role": "link",
+        "name": "今天 3"
+      },
+      {
+        "role": "link",
+        "name": "全部 7"
+      },
+      {
+        "role": "link",
+        "name": "已完成 2"
+      },
+      {
+        "role": "listitem",
+        "name": "标记为未完成：买牛奶 买牛奶 高优先 今天 已完成 编辑：买牛奶 删除：买牛奶"
+      }
+    ],
+    "goneAnchors": [
+      {
+        "text": "0 / 4"
+      },
+      {
+        "text": "还剩 4 项待完成"
+      },
+      {
+        "text": "0%"
+      },
+      {
+        "role": "link",
+        "name": "今天 4"
+      },
+      {
+        "role": "link",
+        "name": "全部 8"
+      },
+      {
+        "role": "link",
+        "name": "已完成 1"
+      },
+      {
+        "role": "listitem",
+        "name": "标记为完成：买牛奶 买牛奶 高优先 今天 编辑：买牛奶 删除：买牛奶"
+      },
+      {
+        "role": "button",
+        "name": "标记为完成：买牛奶"
+      }
+    ],
+    "endWaitMs": 13203,
+    "keyedBy": {
+      "cacheSchema": "trace-1",
+      "policyVersion": "conservative/6",
+      "project": "403fcccf39e2650a7e389bda5a9246bfe8c725769a98b3a749be67a096c16423",
+      "platform": "web",
+      "engineName": "web",
+      "engineSpiVersion": 1,
+      "appIdentity": "aec5acc8a8d7ba14d388c35095196d67ae7ad7199ff1168a3230addcf190cf8d",
+      "agentContextDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

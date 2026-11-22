@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "trace-1",
+  "createdAt": "2026-11-22T10:20:52.708Z",
+  "payload": {
+    "actions": [
+      {
+        "name": "tap",
+        "summary": "tap link \"已逾期 1\"",
+        "target": {
+          "role": "link",
+          "name": "已逾期 1"
+        }
+      }
+    ],
+    "executor": {
+      "name": "e2e-default-agent",
+      "version": "2"
+    },
+    "recordedFor": {
+      "testId": "dated-views.e2e.ts::dated-views",
+      "targetId": "web",
+      "instructionDigest": "6548465576d1c8955ad497e2d8de517318a9bfd1731016d0f216772837d77760",
+      "paramsDigest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "callIndex": 0,
+      "agent": "default"
+    },
+    "recordedBy": {
+      "provider": "anthropic.messages",
+      "model": "claude-opus-5-5"
+    },
+    "summary": "I opened the 已逾期 tab: the page is now /?view=overdue under the heading 已逾期 and lists 1 item, 缴纳本月水电费 (已逾期 · 11-20). The new-task date button here defaults to 无日期.",
+    "startPath": "/?view=upcoming",
+    "endPath": "/?view=overdue",
+    "endAnchors": [
+      {
+        "text": "无日期"
+      },
+      {
+        "role": "heading",
+        "name": "已逾期"
+      },
+      {
+        "text": "过了日期还没完成的任务"
+      },
+      {
+        "text": "1 项"
+      },
+      {
+        "text": "缴纳本月水电费"
+      },
+      {
+        "text": "已逾期 · 11-20"
+      },
+      {
+        "text": "已经逾期，尽快处理"
+      },
+      {
+        "role": "button",
+        "name": "编辑：缴纳本月水电费"
+      }
+    ],
+    "goneAnchors": [
+      {
+        "text": "明天"
+      },
+      {
+        "role": "heading",
+        "name": "即将到来"
+      },
+      {
+        "text": "按日期提前规划接下来的安排"
+      },
+      {
+        "text": "4 项"
+      },
+      {
+        "text": "明天 · 2 项"
+      },
+      {
+        "text": "预约牙医复查"
+      },
+      {
+        "text": "中优先"
+      },
+      {
+        "role": "button",
+        "name": "编辑：预约牙医复查"
+      }
+    ],
+    "endWaitMs": 12964,
+    "keyedBy": {
+      "cacheSchema": "trace-1",
+      "policyVersion": "conservative/6",
+      "project": "403fcccf39e2650a7e389bda5a9246bfe8c725769a98b3a749be67a096c16423",
+      "platform": "web",
+      "engineName": "web",
+      "engineSpiVersion": 1,
+      "appIdentity": "aec5acc8a8d7ba14d388c35095196d67ae7ad7199ff1168a3230addcf190cf8d",
+      "agentContextDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

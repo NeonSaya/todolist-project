@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "flows": {
+    "ai-settings": {
+      "flowId": "ai-settings",
+      "specDigest": "d261d21782ae3c70913662a06245f1a02ad9817966a7782a0f36c983d613366a",
+      "status": "recorded",
+      "recordedAt": "2026-11-22T10:47:56.193Z",
+      "recordedBy": "claude-opus-5-5",
+      "entries": [
+        "9859a4718df065f5eb8fbf88afb6c3634d64ed420e1370c1ee3f8f52de235604.json",
+        "005a3eb8c52796d7c7950bf02d80ea1794a70a72eac7d7b4ab2ecc7e0a065de5.json",
+        "5baf2b0564613d3100e3769a535c4aa686bba43c1783964bc6fe277bd8030890.json"
+      ],
+      "noChangeSteps": [
+        3
+      ],
+      "ranAfter": [
+        "smart-add-unconfigured",
+        "task-lifecycle"
+      ],
+      "ranWith": [
+        "smart-add-unconfigured",
+        "task-lifecycle"
+      ]
+    },
+    "dated-views": {
+      "flowId": "dated-views",
+      "specDigest": "8ca997a48a3896647436736c13677f0157fe2d8064b6b7a98f740272b6c3fb70",
+      "status": "recorded",
+      "recordedAt": "2026-11-22T10:50:37.927Z",
+      "recordedBy": "claude-opus-5-5",
+      "entries": [
+        "564731a77a331f22af78b8e4326f606d605d07c2dce28a4e2a5635f23d8212ef.json",
+        "78e8a93afdaa775149b71683dc78fd733eaab4700391f224f56db1b303039814.json",
+        "fb8a284bf40330b8cf675a5c22a6d21b29bd0d846ac97df93ca0c6c18ffc8a84.json",
+        "743c5c2e259dc067f27d8e39efaeb81a3662b087e758885b959ecabe528bb21d.json"
+      ],
+      "ranAfter": [
+        "ai-settings",
+        "smart-add-analyze",
+        "smart-add-unconfigured",
+        "task-lifecycle"
+      ],
+      "ranWith": [
+        "ai-settings",
+        "smart-add-analyze",
+        "smart-add-unconfigured",
+        "task-lifecycle"
+      ]
+    },
+    "second-user-pending": {
+      "flowId": "second-user-pending",
+      "specDigest": "7a6971498fc22ad1ee765774582625ec8fea56ffb47440aea91ab02850487996",
+      "status": "recorded",
+      "recordedAt": "2026-11-22T10:50:37.935Z",
+      "recordedBy": "claude-opus-5-5",
+      "entries": [
+        "dadbf558781c846791fb53531c2cc7f7f2a6aa2084014ceaf7d846f3aaa61eec.json",
+        "82e0ebceebf99fa402e001eed211733a065b16ee65a8c39b428935096ce69397.json"
+      ],
+      "ranAfter": [
+        "ai-settings",
+        "dated-views",
+        "smart-add-analyze",
+        "smart-add-unconfigured",
+        "task-lifecycle"
+      ],
+      "ranWith": [
+        "ai-settings",
+        "dated-views",
+        "smart-add-analyze",
+        "smart-add-unconfigured",
+        "task-lifecycle"
+      ]
+    },
+    "smart-add-analyze": {
+      "flowId": "smart-add-analyze",
+      "specDigest": "d846ea891ff2a9bfec39b8fc9acf7d027289bc0e97222bef047cf21d3a336f9e",
+      "status": "recorded",
+      "recordedAt": "2026-11-22T10:47:56.194Z",
+      "recordedBy": "claude-opus-5-5",
+      "entries": [
+        "0276c63af5d0b6ea60ed4ac7a44565f2066fbba59d66cec278402885ef4e819c.json",
+        "855301844e2289a12753f671dc25c9e522cc3b25501a8dc6fa6bacedacec8778.json",
+        "dfc2ec022ad88e9e559cbcc96d0d839e45102297bbc79a190518a8ee78a45602.json",
+        "3fe4e59f9244e0455209cad21ea062c41e0b93869d6aa2cf3f37c5859be1601f.json",
+        "49490b7550cbabd683924d18e770035263af841a330767e63a1ca3036393876e.json",
+        "f6ef775d29807c2971e9328e2bb9d475dd00a23c0e504b44a2410b3609830319.json"
+      ],
+      "ranAfter": [
+        "ai-settings",
+        "smart-add-unconfigured",
+        "task-lifecycle"
+      ],
+      "ranWith": [
+        "ai-settings",
+        "smart-add-unconfigured",
+        "task-lifecycle"
+      ]
+    },
+    "smart-add-unconfigured": {
+      "flowId": "smart-add-unconfigured",
+      "specDigest": "fa31df371ad5152a8b8f6fe16f85954ea39c850b35abb9ec5762414c4bd78eab",
+      "status": "recorded",
+      "recordedAt": "2026-11-22T10:47:56.192Z",
+      "recordedBy": "claude-opus-5-5",
+      "entries": [
+        "3ecb96ff437515f4bb28629945994cb7163bd4687a201834f0d0aeff29b4c876.json",
+        "816fbef7f06f84b55093c580278f79a1b1b257870d1fa59074b3741992c1a2f3.json"
+      ],
+      "ranAfter": [],
+      "ranWith": [
+        "task-lifecycle"
+      ],
+      "passedTree": "11bb24321f98fc2232d5afacd10c4261c147acbc",
+      "visitedPaths": [
+        "/",
+        "/smart-add"
+      ]
+    },
+    "task-lifecycle": {
+      "flowId": "task-lifecycle",
+      "specDigest": "92afad6629065de59cfe76fb7b9fc483acf44aa6638f675436f786360e15ed61",
+      "status": "recorded",
+      "recordedAt": "2026-11-22T10:47:56.192Z",
+      "recordedBy": "claude-opus-5-5",
+      "entries": [
+        "dca8ea007da858946ba839c52cdd3c8fe8b95b3fab50c3981e497ce72da4ad78.json",
+        "e084e87dddb7c73fa90c1f14e9a7fb9322895dedfaa91127eac6549d7ba20041.json",
+        "fc07c138dadf6441b96a1c1044aef80fef5834f40178450d7a74fa6cc19679fb.json",
+        "7d7d4c6c99ac832ab866ef8daa4f53ce56c5ba2423f3079cb26fb97a28147a8c.json",
+        "543dfd0969e3304ead9c9aa2f4320e34795d37aa43426b4769e8832a377deae0.json"
+      ],
+      "noChangeSteps": [
+        5
+      ],
+      "ranAfter": [],
+      "ranWith": []
+    }
+  }
+}

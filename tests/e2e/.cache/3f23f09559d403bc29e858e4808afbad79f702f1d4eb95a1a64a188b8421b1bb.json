@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "trace-1",
+  "createdAt": "2026-11-22T10:20:52.707Z",
+  "payload": {
+    "actions": [
+      {
+        "name": "type",
+        "summary": "type \"交报告\" into textbox \"新任务标题\"",
+        "target": {
+          "role": "textbox",
+          "name": "新任务标题",
+          "placeholder": "添加新任务，按 Enter 创建…"
+        },
+        "value": "交报告"
+      },
+      {
+        "name": "tap",
+        "summary": "tap button \"添加\"",
+        "target": {
+          "role": "button",
+          "name": "添加"
+        }
+      }
+    ],
+    "executor": {
+      "name": "e2e-default-agent",
+      "version": "2"
+    },
+    "recordedFor": {
+      "testId": "dated-views.e2e.ts::dated-views",
+      "targetId": "web",
+      "instructionDigest": "88d03448521b6a97280885056771d66161d76e898e6c408d44f236c850699afe",
+      "paramsDigest": "98f19170f0ad008572c80828ea9d909ab44e4d000b085646d07d67034cd6c4c7",
+      "callIndex": 0,
+      "agent": "default"
+    },
+    "recordedBy": {
+      "provider": "anthropic.messages",
+      "model": "claude-opus-5-5"
+    },
+    "summary": "I added the task 交报告 with its date set to tomorrow, 11月23日 周一, which was already selected as the default. It now shows under the 11月23日 group in 即将到来, the app showed the message 已添加任务, and the sidebar counts went up to 即将到来 4 and 全部 8.",
+    "startPath": "/?view=upcoming",
+    "endPath": "/?view=upcoming",
+    "endAnchors": [
+      {
+        "text": "4 项"
+      },
+      {
+        "text": "明天 · 2 项"
+      },
+      {
+        "text": "交报告"
+      },
+      {
+        "role": "button",
+        "name": "编辑：交报告"
+      },
+      {
+        "role": "button",
+        "name": "删除：交报告"
+      },
+      {
+        "role": "link",
+        "name": "即将到来 4"
+      },
+      {
+        "role": "link",
+        "name": "全部 8"
+      },
+      {
+        "role": "heading",
+        "name": "11月23日 周一 明天 · 2 项",
+        "text": "11月23日 周一"
+      }
+    ],
+    "goneAnchors": [
+      {
+        "text": "3 项"
+      },
+      {
+        "text": "明天 · 1 项"
+      },
+      {
+        "role": "link",
+        "name": "即将到来 3"
+      },
+      {
+        "role": "link",
+        "name": "全部 7"
+      },
+      {
+        "role": "heading",
+        "name": "11月23日 周一 明天 · 1 项",
+        "text": "11月23日 周一"
+      }
+    ],
+    "endWaitMs": 15907,
+    "keyedBy": {
+      "cacheSchema": "trace-1",
+      "policyVersion": "conservative/6",
+      "project": "403fcccf39e2650a7e389bda5a9246bfe8c725769a98b3a749be67a096c16423",
+      "platform": "web",
+      "engineName": "web",
+      "engineSpiVersion": 1,
+      "appIdentity": "aec5acc8a8d7ba14d388c35095196d67ae7ad7199ff1168a3230addcf190cf8d",
+      "agentContextDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

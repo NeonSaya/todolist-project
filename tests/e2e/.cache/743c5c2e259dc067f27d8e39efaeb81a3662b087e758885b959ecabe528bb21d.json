@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "trace-1",
+  "createdAt": "2026-11-22T10:50:22.110Z",
+  "payload": {
+    "actions": [
+      {
+        "name": "tap",
+        "summary": "tap link \"全部 11\"",
+        "target": {
+          "role": "link",
+          "name": "全部 11"
+        }
+      }
+    ],
+    "executor": {
+      "name": "e2e-default-agent",
+      "version": "2"
+    },
+    "recordedFor": {
+      "testId": "dated-views.e2e.ts::dated-views",
+      "targetId": "web",
+      "instructionDigest": "982f6b72e56fb3b8b9a76ddb49c4ea20efea07b5e3a1817c23340f81ad4bd1b2",
+      "paramsDigest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "callIndex": 0,
+      "agent": "default"
+    },
+    "recordedBy": {
+      "provider": "anthropic.messages",
+      "model": "claude-opus-5-5"
+    },
+    "summary": "The 全部 view is open at /?view=all under the heading 全部 and shows \"12 项\". 交房租 is in the list, dated 明天, with 中 priority.",
+    "startPath": "/?view=overdue",
+    "endPath": "/?view=all",
+    "endAnchors": [
+      {
+        "role": "heading",
+        "name": "全部"
+      },
+      {
+        "text": "所有任务，按日期与优先级排列"
+      },
+      {
+        "text": "12 项"
+      },
+      {
+        "text": "整理本周的工作计划"
+      },
+      {
+        "text": "先列出三件最重要的事"
+      },
+      {
+        "role": "button",
+        "name": "编辑：整理本周的工作计划"
+      },
+      {
+        "role": "button",
+        "name": "删除：整理本周的工作计划"
+      },
+      {
+        "text": "回复客户的邮件"
+      }
+    ],
+    "goneAnchors": [
+      {
+        "role": "heading",
+        "name": "已逾期"
+      },
+      {
+        "text": "过了日期还没完成的任务"
+      },
+      {
+        "text": "1 项"
+      },
+      {
+        "role": "region",
+        "name": "已逾期任务"
+      }
+    ],
+    "endWaitMs": 13072,
+    "keyedBy": {
+      "cacheSchema": "trace-1",
+      "policyVersion": "conservative/6",
+      "project": "403fcccf39e2650a7e389bda5a9246bfe8c725769a98b3a749be67a096c16423",
+      "platform": "web",
+      "engineName": "web",
+      "engineSpiVersion": 1,
+      "appIdentity": "aec5acc8a8d7ba14d388c35095196d67ae7ad7199ff1168a3230addcf190cf8d",
+      "agentContextDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

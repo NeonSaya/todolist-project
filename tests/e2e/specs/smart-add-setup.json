@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "spec": {
+    "id": "smart-add-setup",
+    "kind": "interactive",
+    "goal": "Smart add guides an unconfigured user to AI settings",
+    "requirementIndexes": [
+      13,
+      14,
+      15,
+      16
+    ],
+    "acceptanceCriteriaIndexes": [
+      6
+    ],
+    "steps": [
+      "Press 智能添加",
+      "Press 去设置"
+    ],
+    "checks": [
+      {
+        "afterStep": 0,
+        "expectText": "去设置"
+      },
+      {
+        "afterStep": 1,
+        "expectPath": "/settings"
+      },
+      {
+        "afterStep": 1,
+        "expectText": "测试连接"
+      }
+    ]
+  }
+}

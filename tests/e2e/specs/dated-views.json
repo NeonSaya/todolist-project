@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "spec": {
+    "id": "dated-views",
+    "kind": "interactive",
+    "goal": "A task dated tomorrow lands in the 即将到来 view, not in 已逾期, and shows in 全部",
+    "requirementIndexes": [],
+    "acceptanceCriteriaIndexes": [],
+    "steps": [
+      "Open the 即将到来 view",
+      "Add a task titled 交房租 and pick 明天 as its date",
+      "Open the 已逾期 view",
+      "Open the 全部 view"
+    ],
+    "checks": [
+      {
+        "afterStep": 0,
+        "expectRole": {
+          "role": "heading",
+          "name": "即将到来"
+        }
+      },
+      {
+        "afterStep": 1,
+        "expectText": "交房租"
+      },
+      {
+        "afterStep": 2,
+        "expectRole": {
+          "role": "heading",
+          "name": "已逾期"
+        }
+      },
+      {
+        "afterStep": 2,
+        "expectNoText": "交房租"
+      },
+      {
+        "afterStep": 3,
+        "expectText": "交房租"
+      }
+    ]
+  }
+}

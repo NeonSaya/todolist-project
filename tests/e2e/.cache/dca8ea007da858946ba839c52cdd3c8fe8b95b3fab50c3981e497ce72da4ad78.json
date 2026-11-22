@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "trace-1",
+  "createdAt": "2026-11-22T10:46:29.407Z",
+  "payload": {
+    "actions": [
+      {
+        "name": "type",
+        "summary": "type \"整理书桌\" into textbox \"新任务标题\"",
+        "target": {
+          "role": "textbox",
+          "name": "新任务标题",
+          "placeholder": "添加任务，按 Enter 创建…"
+        },
+        "value": "整理书桌"
+      },
+      {
+        "name": "tap",
+        "summary": "tap button \"添加\"",
+        "target": {
+          "role": "button",
+          "name": "添加"
+        }
+      }
+    ],
+    "executor": {
+      "name": "e2e-default-agent",
+      "version": "2"
+    },
+    "recordedFor": {
+      "testId": "task-lifecycle.e2e.ts::task-lifecycle",
+      "targetId": "web",
+      "instructionDigest": "242b2251b6a1740ea5f8b7132fd73c9115302aca05b11c5b90471b747afc1c50",
+      "paramsDigest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "callIndex": 0,
+      "agent": "default"
+    },
+    "recordedBy": {
+      "provider": "anthropic.messages",
+      "model": "claude-opus-5-5"
+    },
+    "summary": "I added the task 整理书桌 using the quick add form. It now shows in the 今天 list with 中 priority, and a toast reads \"已添加任务 整理书桌\". The 全部 count went from 7 to 8.",
+    "startPath": "/?view=today",
+    "endPath": "/?view=today",
+    "endAnchors": [
+      {
+        "text": "5 项"
+      },
+      {
+        "text": "已完成 1 / 5"
+      },
+      {
+        "text": "20%"
+      },
+      {
+        "text": "整理书桌"
+      },
+      {
+        "role": "button",
+        "name": "编辑：整理书桌"
+      },
+      {
+        "role": "button",
+        "name": "删除：整理书桌"
+      },
+      {
+        "role": "link",
+        "name": "今天 4"
+      }
+    ],
+    "goneAnchors": [
+      {
+        "text": "4 项"
+      },
+      {
+        "text": "已完成 1 / 4"
+      },
+      {
+        "text": "25%"
+      },
+      {
+        "role": "link",
+        "name": "今天 3"
+      },
+      {
+        "role": "link",
+        "name": "全部 7"
+      },
+      {
+        "role": "image",
+        "name": "今日完成进度 25%"
+      }
+    ],
+    "endWaitMs": 13082,
+    "keyedBy": {
+      "cacheSchema": "trace-1",
+      "policyVersion": "conservative/6",
+      "project": "403fcccf39e2650a7e389bda5a9246bfe8c725769a98b3a749be67a096c16423",
+      "platform": "web",
+      "engineName": "web",
+      "engineSpiVersion": 1,
+      "appIdentity": "aec5acc8a8d7ba14d388c35095196d67ae7ad7199ff1168a3230addcf190cf8d",
+      "agentContextDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

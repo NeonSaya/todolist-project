@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "trace-1",
+  "createdAt": "2026-11-22T10:46:46.233Z",
+  "payload": {
+    "actions": [
+      {
+        "name": "type",
+        "summary": "type \"记得买牛奶\" into textbox \"要整理的文字\"",
+        "target": {
+          "role": "textbox",
+          "name": "要整理的文字",
+          "placeholder": "粘贴聊天记录、会议纪要或随手想法，例如： “明天下午三点前把季度复盘 PPT 发给王总，周五记得交房租，下周三和设计团队过一遍新版首页。”"
+        },
+        "value": "记得买牛奶"
+      },
+      {
+        "name": "tap",
+        "summary": "tap button \"分析\"",
+        "target": {
+          "role": "button",
+          "name": "分析"
+        }
+      }
+    ],
+    "executor": {
+      "name": "e2e-default-agent",
+      "version": "2"
+    },
+    "recordedFor": {
+      "testId": "smart-add-unconfigured.e2e.ts::smart-add-unconfigured",
+      "targetId": "web",
+      "instructionDigest": "9a476a033a35cfa4f9f5a2aba1a57dc613244ab260c739146dc9fa8e82d220b7",
+      "paramsDigest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "callIndex": 0,
+      "agent": "default"
+    },
+    "recordedBy": {
+      "provider": "anthropic.messages",
+      "model": "claude-opus-5-5"
+    },
+    "summary": "I typed 记得买牛奶 into the text area and pressed 分析. Because no AI service is set up, the app showed a prompt titled \"还差一步：连接你的 AI 服务\". The prompt has a \"前往 AI 设置\" link to /settings and a \"关闭提示\" button to close it.",
+    "startPath": "/smart-add",
+    "endPath": "/smart-add",
+    "endAnchors": [
+      {
+        "role": "textbox",
+        "name": "要整理的文字",
+        "text": "记得买牛奶",
+        "placeholder": "粘贴聊天记录、会议纪要或随手想法，例如： “明天下午三点前把季度复盘 PPT 发给王总，周五记得交房租，下周三和设计团队过一遍新版首页。”",
+        "value": "记得买牛奶"
+      },
+      {
+        "text": "5 / 12,000 字· Ctrl / ⌘ + Enter 快速分析"
+      },
+      {
+        "role": "button",
+        "name": "清空"
+      },
+      {
+        "role": "button",
+        "name": "关闭提示"
+      },
+      {
+        "role": "heading",
+        "name": "还差一步：连接你的 AI 服务"
+      },
+      {
+        "text": "智能添加使用你自己的接口地址、API Key 与模型。Key 只保存在本浏览器中，配置好后回到这里即可一键分析，你的内容不会丢失。"
+      },
+      {
+        "role": "link",
+        "name": "前往 AI 设置"
+      }
+    ],
+    "goneAnchors": [
+      {
+        "role": "textbox",
+        "name": "要整理的文字",
+        "placeholder": "粘贴聊天记录、会议纪要或随手想法，例如： “明天下午三点前把季度复盘 PPT 发给王总，周五记得交房租，下周三和设计团队过一遍新版首页。”"
+      },
+      {
+        "text": "0 / 12,000 字· Ctrl / ⌘ + Enter 快速分析"
+      }
+    ],
+    "endWaitMs": 12970,
+    "keyedBy": {
+      "cacheSchema": "trace-1",
+      "policyVersion": "conservative/6",
+      "project": "403fcccf39e2650a7e389bda5a9246bfe8c725769a98b3a749be67a096c16423",
+      "platform": "web",
+      "engineName": "web",
+      "engineSpiVersion": 1,
+      "appIdentity": "aec5acc8a8d7ba14d388c35095196d67ae7ad7199ff1168a3230addcf190cf8d",
+      "agentContextDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

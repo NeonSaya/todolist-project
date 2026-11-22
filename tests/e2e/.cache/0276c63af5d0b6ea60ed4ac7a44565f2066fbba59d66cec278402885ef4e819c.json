@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "trace-1",
+  "createdAt": "2026-11-22T10:47:56.059Z",
+  "payload": {
+    "actions": [
+      {
+        "name": "tap",
+        "summary": "tap link \"AI 设置 未配置\"",
+        "target": {
+          "role": "link",
+          "name": "AI 设置 未配置"
+        }
+      }
+    ],
+    "executor": {
+      "name": "e2e-default-agent",
+      "version": "2"
+    },
+    "recordedFor": {
+      "testId": "smart-add-analyze.e2e.ts::smart-add-analyze",
+      "targetId": "web",
+      "instructionDigest": "940376bb91877153660001a06b47507657ecd8e4c204aaaebb8e8105422bb8ff",
+      "paramsDigest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+      "callIndex": 0,
+      "agent": "default"
+    },
+    "recordedBy": {
+      "provider": "anthropic.messages",
+      "model": "claude-opus-5-5"
+    },
+    "summary": "AI 设置 is open at /settings. It shows the 接口地址 (https://api.openai.com/v1), API Key (empty) and 模型名称 (gpt-4o-mini) fields, along with a 保存 button.",
+    "startPath": "/?view=today",
+    "endPath": "/settings",
+    "endAnchors": [
+      {
+        "role": "heading",
+        "name": "AI 设置"
+      },
+      {
+        "text": "连接你自己的 OpenAI 兼容服务，拾序会用它把粘贴的文字整理成任务。"
+      },
+      {
+        "text": "尚未配置 API Key"
+      },
+      {
+        "text": "https://api.openai.com/v1 · gpt-4o-mini"
+      },
+      {
+        "text": "接口地址"
+      },
+      {
+        "role": "textbox",
+        "name": "接口地址",
+        "placeholder": "https://api.openai.com/v1",
+        "value": "https://api.openai.com/v1"
+      },
+      {
+        "text": "任意兼容 OpenAI 的服务，填到版本路径即可，如 https://api.openai.com/v1；末尾的 /chat/completions 会自动去掉。"
+      },
+      {
+        "text": "API Key"
+      }
+    ],
+    "goneAnchors": [
+      {
+        "role": "heading",
+        "name": "今天"
+      },
+      {
+        "text": "11月22日 周日"
+      },
+      {
+        "text": "专注今天要完成的事"
+      },
+      {
+        "text": "4 项"
+      },
+      {
+        "text": "待办"
+      },
+      {
+        "text": "逾期"
+      },
+      {
+        "text": "进度"
+      },
+      {
+        "text": "已完成 1 / 4"
+      }
+    ],
+    "endWaitMs": 12728,
+    "keyedBy": {
+      "cacheSchema": "trace-1",
+      "policyVersion": "conservative/6",
+      "project": "403fcccf39e2650a7e389bda5a9246bfe8c725769a98b3a749be67a096c16423",
+      "platform": "web",
+      "engineName": "web",
+      "engineSpiVersion": 1,
+      "appIdentity": "aec5acc8a8d7ba14d388c35095196d67ae7ad7199ff1168a3230addcf190cf8d",
+      "agentContextDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

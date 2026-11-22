@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>拾序 · 把纷乱拾成秩序</title>
+    <meta name="description" content="拾序 — 按优先级与日期安排生活，粘贴文字由 AI 智能拆成任务。" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f4f6f9" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0e1116" media="(prefers-color-scheme: dark)" />
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem("shixu-theme");
+          var dark =
+            stored === "dark" ||
+            ((!stored || stored === "system") &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches);
+          var root = document.documentElement;
+          root.classList.add(dark ? "dark" : "light");
+          root.style.colorScheme = dark ? "dark" : "light";
+          if (stored === "light" || stored === "dark") {
+            var metas = document.querySelectorAll('meta[name="theme-color"]');
+            for (var i = 0; i < metas.length; i++) {
+              metas[i].setAttribute("content", dark ? "#0e1116" : "#f4f6f9");
+            }
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <meta property="og:title" content="拾序 · 把纷乱拾成秩序" />
+    <meta property="og:description" content="按优先级与日期安排生活，粘贴文字由 AI 智能拆成任务。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://caffeine.ai/imgs/share-logo.jpeg" />
+    <meta property="og:image:alt" content="Built with caffeine.ai" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://caffeine.ai/imgs/share-logo.jpeg" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
+</html>
