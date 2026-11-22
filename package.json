@@ -1,22 +1,59 @@
 {
-  "name": "@caffeine/template-app",
+  "name": "shixu",
+  "version": "0.1.0",
+  "private": true,
   "type": "module",
   "packageManager": "pnpm@10.26.1+sha512.664074abc367d2c9324fdc18037097ce0a8f126034160f709928e9e9f95d98714347044e5c3164d65bd5da6c59c6be362b107546292a8eecb7999196e5ce58fa",
   "engines": {
     "node": ">=20.19.0",
-    "pnpm": ">=7.0.0",
-    "npm": "please use pnpm"
+    "pnpm": ">=10"
   },
   "scripts": {
-    "build": "pnpm -r --if-present run build",
-    "typecheck": "pnpm -r --if-present run typecheck",
-    "check": "pnpm -r --if-present run check",
-    "fix": "pnpm -r --if-present run fix",
-    "bindgen": "caffeine-bindgen --did-file ./src/backend/dist/backend.did --out-dir ./src/frontend/src --actor-interface-file --force"
+    "dev": "vite",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit",
+    "check": "biome check src",
+    "fix": "biome check --write src",
+    "test": "playwright test",
+    "desktop": "tauri",
+    "bindgen": "icp-bindgen --did-file backend/dist/backend.did --out-dir src/lib/taskStore --actor-disabled --declarations-flat --declarations-typescript --force"
+  },
+  "dependencies": {
+    "@icp-sdk/core": "^5.3.0",
+    "@radix-ui/react-alert-dialog": "^1.1.2",
+    "@radix-ui/react-checkbox": "^1.1.1",
+    "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-dropdown-menu": "^2.1.1",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-popover": "^1.1.1",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@tanstack/react-query": "^5.24.0",
+    "@tanstack/react-router": "~1.131.8",
+    "@tauri-apps/api": "^2.12.5",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "idb": "^8.0.3",
+    "lucide-react": "0.511.0",
+    "motion": "^12.34.3",
+    "next-themes": "~0.4.6",
+    "react": "~19.1.0",
+    "react-dom": "~19.1.0",
+    "sonner": "^1.7.4",
+    "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {
-    "@dfinity/pic": "^0.23.0",
-    "@icp-sdk/core": "^5.3.0",
-    "sharp": "^0.34.4"
+    "@biomejs/biome": "^1.9.0",
+    "@icp-sdk/bindgen": "^0.4.1",
+    "@playwright/test": "^1.65.1",
+    "@tauri-apps/cli": "^2.12.6",
+    "@types/react": "~19.1.0",
+    "@types/react-dom": "~19.1.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.41",
+    "tailwindcss": "^3.4.17",
+    "tailwindcss-animate": "^1.0.7",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4"
   }
 }
