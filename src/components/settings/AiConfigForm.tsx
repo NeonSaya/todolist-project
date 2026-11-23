@@ -3,12 +3,24 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { type ConnectionResult, testConnection } from "@/lib/ai";
 import {
+  AI_PROTOCOLS,
+  AI_PROTOCOL_META,
   type AiConfig,
+  type AiProtocol,
   DEFAULT_BASE_URL,
   DEFAULT_MODEL,
+  DEFAULT_PROTOCOL,
   useAiConfig,
 } from "@/lib/aiConfig";
-import { Boxes, Globe, KeyRound, Loader2, Plug, Save } from "lucide-react";
+import {
+  ArrowLeftRight,
+  Boxes,
+  Globe,
+  KeyRound,
+  Loader2,
+  Plug,
+  Save,
+} from "lucide-react";
 import { type FormEvent, type ReactNode, useRef, useState } from "react";
 import { toast } from "sonner";
 import { ApiKeyField } from "./ApiKeyField";
@@ -17,6 +29,7 @@ import { ConnectionStatus } from "./ConnectionStatus";
 import { SettingGroup } from "./SettingGroup";
 
 const DEFAULT_FORM: AiConfig = {
+  protocol: DEFAULT_PROTOCOL,
   baseUrl: DEFAULT_BASE_URL,
   apiKey: "",
   model: DEFAULT_MODEL,
@@ -76,13 +89,35 @@ export function AiConfigForm() {
   const [result, setResult] = useState<ConnectionResult | null>(null);
   const formVersion = useRef(0);
 
-  const update = (key: keyof AiConfig) => (value: string) => {
+  const update = (key: "baseUrl" | "apiKey" | "model") => (value: string) => {
     formVersion.current += 1;
     setForm((prev) => ({ ...prev, [key]: value }));
     setResult(null);
   };
 
+  const updateProtocol = (protocol: AiProtocol) => {
+    formVersion.current += 1;
+    setForm((prev) => {
+      const previous = AI_PROTOCOL_META[prev.protocol];
+      const next = AI_PROTOCOL_META[protocol];
+      return {
+        ...prev,
+        protocol,
+        baseUrl:
+          !prev.baseUrl.trim() || prev.baseUrl === previous.defaultBaseUrl
+            ? next.defaultBaseUrl
+            : prev.baseUrl,
+        model:
+          !prev.model.trim() || prev.model === previous.defaultModel
+            ? next.defaultModel
+            : prev.model,
+      };
+    });
+    setResult(null);
+  };
+
   const keyMissing = !form.apiKey.trim();
+  const protocolMeta = AI_PROTOCOL_META[form.protocol];
 
   const handleSave = (e: FormEvent) => {
     e.preventDefault();
@@ -101,9 +136,10 @@ export function AiConfigForm() {
     setTesting(true);
     setResult(null);
     const outcome = await testConnection({
-      baseUrl: form.baseUrl.trim() || DEFAULT_BASE_URL,
+      protocol: form.protocol,
+      baseUrl: form.baseUrl.trim() || protocolMeta.defaultBaseUrl,
       apiKey: form.apiKey.trim(),
-      model: form.model.trim() || DEFAULT_MODEL,
+      model: form.model.trim() || protocolMeta.defaultModel,
     });
     if (version === formVersion.current) setResult(outcome);
     setTesting(false);
@@ -130,9 +166,55 @@ export function AiConfigForm() {
       <div className="divide-y divide-border">
         <SettingGroup
           step={1}
+          icon={ArrowLeftRight}
+          title="接口协议"
+          description="按服务商提供的 API 格式选择。"
+          ocid="settings.protocol.section"
+        >
+          <div
+            role="radiogroup"
+            aria-label="AI 接口协议"
+            className="grid gap-2 sm:grid-cols-3"
+          >
+            {AI_PROTOCOLS.map((protocol) => {
+              const meta = AI_PROTOCOL_META[protocol];
+              const checked = form.protocol === protocol;
+              return (
+                <label
+                  key={protocol}
+                  className={`cursor-pointer rounded-xl border p-3 transition-smooth focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background ${
+                    checked
+                      ? "border-primary bg-primary/10 shadow-xs"
+                      : "border-border bg-background hover:border-primary/40 hover:bg-secondary/60"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="ai-protocol"
+                    value={protocol}
+                    checked={checked}
+                    onChange={() => updateProtocol(protocol)}
+                    aria-label={meta.label}
+                    data-ocid={`settings.protocol.${protocol}.radio`}
+                    className="sr-only"
+                  />
+                  <span className="block text-sm font-semibold text-foreground">
+                    {meta.label}
+                  </span>
+                  <span className="mt-1 block text-[11px] leading-relaxed text-muted-foreground">
+                    {meta.description}
+                  </span>
+                </label>
+              );
+            })}
+          </div>
+        </SettingGroup>
+
+        <SettingGroup
+          step={2}
           icon={Globe}
           title="接口地址"
-          description="OpenAI 兼容服务的 Base URL。"
+          description="所选协议服务的 Base URL。"
           ocid="settings.base_url.section"
         >
           <TextField
@@ -140,19 +222,19 @@ export function AiConfigForm() {
             ocid="settings.base_url.input"
             label="Base URL"
             value={form.baseUrl}
-            placeholder={DEFAULT_BASE_URL}
+            placeholder={protocolMeta.defaultBaseUrl}
             onChange={update("baseUrl")}
             hint={
               <>
-                填到版本路径即可，如 <Code>{DEFAULT_BASE_URL}</Code>
-                ，末尾的 /chat/completions 会自动去掉。
+                填到版本路径即可，如 <Code>{protocolMeta.defaultBaseUrl}</Code>
+                ，末尾的 {protocolMeta.endpointPath} 会自动去掉。
               </>
             }
           />
         </SettingGroup>
 
         <SettingGroup
-          step={2}
+          step={3}
           icon={KeyRound}
           title="API Key"
           description="用于身份验证，仅保存在本机。"
@@ -162,7 +244,7 @@ export function AiConfigForm() {
         </SettingGroup>
 
         <SettingGroup
-          step={3}
+          step={4}
           icon={Boxes}
           title="模型"
           description="用于整理任务的模型 ID。"
@@ -173,12 +255,12 @@ export function AiConfigForm() {
             ocid="settings.model.input"
             label="模型名称"
             value={form.model}
-            placeholder={DEFAULT_MODEL}
+            placeholder={protocolMeta.defaultModel}
             onChange={update("model")}
             hint={
               <>
                 与服务商控制台中的模型 ID 一致，留空则使用{" "}
-                <Code>{DEFAULT_MODEL}</Code>。
+                <Code>{protocolMeta.defaultModel}</Code>。
               </>
             }
           />

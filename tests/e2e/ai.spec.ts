@@ -5,11 +5,48 @@ import { type Page, expect, test } from "@playwright/test";
 const TEST_KEY = "sk-shixu-test-placeholder";
 const TEST_MODEL = "test-chat";
 
+type TestProtocol = "openai-responses" | "anthropic-messages" | "openai-chat";
+
+const PROTOCOL_LABELS: Record<TestProtocol, string> = {
+  "openai-responses": "OpenAI Responses",
+  "anthropic-messages": "Anthropic Messages",
+  "openai-chat": "OpenAI Chat Completions",
+};
+
 function completion(content: string) {
   return { choices: [{ message: { content } }] };
 }
 
-async function fillConfig(page: Page, baseURL: string) {
+function openAiResponse(content: string) {
+  return {
+    output: [
+      {
+        type: "reasoning",
+        content: [{ type: "reasoning_text", text: "不应混入任务结果" }],
+      },
+      {
+        type: "message",
+        content: [{ type: "output_text", text: content }],
+      },
+    ],
+  };
+}
+
+function anthropicMessage(content: string) {
+  return {
+    content: [
+      { type: "thinking", thinking: "不应混入任务结果" },
+      { type: "text", text: content },
+    ],
+  };
+}
+
+async function fillConfig(
+  page: Page,
+  baseURL: string,
+  protocol: TestProtocol = "openai-chat",
+) {
+  await page.getByText(PROTOCOL_LABELS[protocol], { exact: true }).click();
   await page.getByLabel("Base URL").fill(baseURL);
   await page.locator("#ai-api-key").fill(TEST_KEY);
   await page.getByLabel("模型名称").fill(TEST_MODEL);
@@ -24,6 +61,9 @@ test("未配置时引导到 AI 设置，拒绝无效地址并记住有效配置"
   await page.getByTestId("smart_add.analyze.primary_button").click();
   await expect(page.getByTestId("smart_add.ai_status.link")).toBeVisible();
   await page.getByTestId("smart_add.ai_status.link").click();
+  await expect(
+    page.getByRole("radio", { name: "OpenAI Chat Completions", exact: true }),
+  ).toBeChecked();
   await fillConfig(page, "file:///settings");
   await page.getByRole("button", { name: "保存", exact: true }).click();
   await expect(
@@ -123,6 +163,205 @@ test("验证接口、解析、修订及批量保存选中的建议", async ({ pa
   await expect(
     page.getByRole("button", { name: "暂缓的任务", exact: true }),
   ).toHaveCount(0);
+});
+
+test("OpenAI Responses 使用 instructions/input 并解析两种文本响应", async ({
+  page,
+  baseURL,
+}) => {
+  const payloads: {
+    max_output_tokens: number;
+    instructions?: string;
+    input: { role: string; content: string }[];
+  }[] = [];
+  await page.route("**/fake/v1/responses?api-version=test", async (route) => {
+    const request = route.request();
+    expect(request.headers().authorization).toBe(`Bearer ${TEST_KEY}`);
+    const payload = request.postDataJSON();
+    expect(payload.model).toBe(TEST_MODEL);
+    payloads.push(payload);
+    if (payloads.length === 1) {
+      await route.fulfill({ json: { output_text: "OK" } });
+      return;
+    }
+    await route.fulfill({
+      json: openAiResponse(
+        JSON.stringify({
+          tasks: [
+            {
+              title: "提交季度总结",
+              date: "2026-11-25",
+              priority: "high",
+              note: null,
+            },
+          ],
+        }),
+      ),
+    });
+  });
+
+  await page.goto("/settings");
+  await fillConfig(
+    page,
+    `${baseURL}/fake/v1/responses/?api-version=test`,
+    "openai-responses",
+  );
+  await page.getByRole("button", { name: "测试连接" }).click();
+  await expect(page.getByText("连接成功", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "保存", exact: true }).click();
+  await page.getByTestId("nav.smart_add.link").click();
+  await page.getByTestId("smart_add.textarea").fill("下周三提交季度总结");
+  await page.getByTestId("smart_add.analyze.primary_button").click();
+  await expect(page.getByTestId("smart_add.suggestion.input.1")).toHaveValue(
+    "提交季度总结",
+  );
+
+  expect(payloads).toHaveLength(2);
+  expect(payloads[0].max_output_tokens).toBe(64);
+  expect(payloads[0].instructions).toBeUndefined();
+  expect(payloads[0].input).toEqual([
+    { role: "user", content: "请只回复：OK" },
+  ]);
+  expect(payloads[1].max_output_tokens).toBe(4096);
+  expect(payloads[1].instructions).toContain("任务整理助手");
+  expect(payloads[1].input.at(-1)?.content).toBe("下周三提交季度总结");
+});
+
+test("Anthropic Messages 使用专用鉴权、保存协议并合并文本块", async ({
+  page,
+  baseURL,
+}) => {
+  const payloads: {
+    max_tokens: number;
+    system?: string;
+    messages: { role: string; content: string }[];
+  }[] = [];
+  await page.route(
+    "**/fake/anthropic/v1/messages?api-version=test",
+    async (route) => {
+      const request = route.request();
+      const headers = request.headers();
+      expect(headers["x-api-key"]).toBe(TEST_KEY);
+      expect(headers["anthropic-version"]).toBe("2023-06-01");
+      expect(headers["anthropic-dangerous-direct-browser-access"]).toBe("true");
+      expect(headers.authorization).toBeUndefined();
+      const payload = request.postDataJSON();
+      expect(payload.model).toBe(TEST_MODEL);
+      payloads.push(payload);
+      if (payloads.length === 1) {
+        await route.fulfill({ json: anthropicMessage("OK") });
+        return;
+      }
+      const content = JSON.stringify({
+        tasks: [
+          {
+            title: "预约牙医",
+            date: "2026-11-24",
+            priority: "medium",
+            note: "上午",
+          },
+        ],
+      });
+      await route.fulfill({
+        json: {
+          content: [
+            { type: "text", text: content.slice(0, 24) },
+            { type: "text", text: content.slice(24) },
+          ],
+        },
+      });
+    },
+  );
+
+  await page.goto("/settings");
+  await fillConfig(
+    page,
+    `${baseURL}/fake/anthropic/v1/messages/?api-version=test`,
+    "anthropic-messages",
+  );
+  await page.getByRole("button", { name: "测试连接" }).click();
+  await expect(page.getByText("连接成功", { exact: true })).toBeVisible();
+  await page.getByRole("button", { name: "保存", exact: true }).click();
+  await page.reload();
+  await expect(
+    page.getByRole("radio", { name: "Anthropic Messages", exact: true }),
+  ).toBeChecked();
+  await expect(page.getByLabel("Base URL")).toHaveValue(
+    `${baseURL}/fake/anthropic/v1?api-version=test`,
+  );
+  await page.getByTestId("nav.smart_add.link").click();
+  await page.getByTestId("smart_add.textarea").fill("明天上午预约牙医");
+  await page.getByTestId("smart_add.analyze.primary_button").click();
+  await expect(page.getByTestId("smart_add.suggestion.input.1")).toHaveValue(
+    "预约牙医",
+  );
+
+  expect(payloads).toHaveLength(2);
+  expect(payloads[0].max_tokens).toBe(64);
+  expect(payloads[0].system).toBeUndefined();
+  expect(payloads[0].messages).toEqual([
+    { role: "user", content: "请只回复：OK" },
+  ]);
+  expect(payloads[1].max_tokens).toBe(4096);
+  expect(payloads[1].system).toContain("任务整理助手");
+  expect(payloads[1].messages.at(-1)?.content).toBe("明天上午预约牙医");
+});
+
+test("Anthropic Base URL 不含版本路径时自动补上 /v1/messages", async ({
+  page,
+  baseURL,
+}) => {
+  await page.route("**/deepseek-style/anthropic/v1/messages", async (route) => {
+    await route.fulfill({ json: anthropicMessage("OK") });
+  });
+  await page.goto("/settings");
+  await fillConfig(
+    page,
+    `${baseURL}/deepseek-style/anthropic`,
+    "anthropic-messages",
+  );
+  await page.getByRole("button", { name: "测试连接" }).click();
+  await expect(page.getByText("连接成功", { exact: true })).toBeVisible();
+});
+
+test("旧版配置没有协议字段时继续使用 Chat Completions", async ({
+  page,
+  baseURL,
+}) => {
+  await page.addInitScript(
+    (config) => {
+      window.localStorage.setItem("shixu.ai-config.v1", JSON.stringify(config));
+    },
+    {
+      baseUrl: `${baseURL}/legacy/v1`,
+      apiKey: TEST_KEY,
+      model: TEST_MODEL,
+    },
+  );
+  await page.route("**/legacy/v1/chat/completions", async (route) => {
+    await route.fulfill({ json: completion("OK") });
+  });
+  await page.goto("/settings");
+  await expect(
+    page.getByRole("radio", { name: "OpenAI Chat Completions", exact: true }),
+  ).toBeChecked();
+  await page.getByRole("button", { name: "测试连接" }).click();
+  await expect(page.getByText("连接成功", { exact: true })).toBeVisible();
+});
+
+test("Anthropic 错误详情会隐藏 API Key", async ({ page, baseURL }) => {
+  await page.route("**/fake/anthropic/v1/messages", async (route) => {
+    await route.fulfill({
+      status: 401,
+      json: { error: { message: ` rejected ${TEST_KEY}` } },
+    });
+  });
+  await page.goto("/settings");
+  await fillConfig(page, `${baseURL}/fake/anthropic/v1`, "anthropic-messages");
+  await page.getByRole("button", { name: "测试连接" }).click();
+  const error = page.getByTestId("settings.test.error_state");
+  await expect(error).toContainText("[已隐藏]");
+  await expect(error).not.toContainText(TEST_KEY);
 });
 
 test("连接响应回来前更换模型时丢弃过时结果", async ({ page, baseURL }) => {

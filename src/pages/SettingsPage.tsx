@@ -1,5 +1,5 @@
 import { AiConfigForm } from "@/components/settings/AiConfigForm";
-import { useAiConfig } from "@/lib/aiConfig";
+import { AI_PROTOCOL_META, useAiConfig } from "@/lib/aiConfig";
 import { ShieldCheck, Sparkles } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 
@@ -20,7 +20,8 @@ export default function SettingsPage() {
           AI 设置
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          连接你自己的 OpenAI 兼容服务，拾序会用它把粘贴的文字整理成任务。
+          连接你自己的 OpenAI 或 Anthropic
+          兼容服务，拾序会用它把粘贴的文字整理成任务。
         </p>
         <p
           data-ocid="settings.local_storage.badge"
@@ -53,7 +54,8 @@ export default function SettingsPage() {
             </p>
           </div>
           <p className="tabular mt-1 truncate font-mono text-xs text-muted-foreground">
-            {config.baseUrl} · {config.model}
+            {AI_PROTOCOL_META[config.protocol].label} · {config.baseUrl} ·{" "}
+            {config.model}
           </p>
         </div>
       </div>

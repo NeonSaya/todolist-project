@@ -1,6 +1,12 @@
 import { Priority, TASK_NOTE_MAX_LENGTH, TASK_TITLE_MAX_LENGTH } from "@/types";
 import { invoke, isTauri } from "@tauri-apps/api/core";
-import { type AiConfig, isAiConfigured, normalizeBaseUrl } from "./aiConfig";
+import {
+  AI_PROTOCOL_META,
+  type AiConfig,
+  type AiProtocol,
+  isAiConfigured,
+  normalizeBaseUrl,
+} from "./aiConfig";
 import { addDays, parseLocalDate } from "./tasks";
 
 /** A task proposed by AI from pasted text; reviewed before saving. */
@@ -227,7 +233,8 @@ interface AiHttpResponse {
 async function sendAiRequest(
   endpoint: string,
   apiKey: string,
-  payload: { model: string; messages: ChatMessage[] },
+  protocol: AiProtocol,
+  payload: Record<string, unknown>,
   timeoutMs: number,
 ): Promise<AiHttpResponse> {
   if (isTauri()) {
@@ -235,6 +242,7 @@ async function sendAiRequest(
       return await invoke<AiHttpResponse>("send_ai_request", {
         endpoint,
         apiKey,
+        protocol,
         payload,
         timeoutMs,
       });
@@ -246,15 +254,23 @@ async function sendAiRequest(
     }
   }
 
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
+  if (protocol === "anthropic-messages") {
+    headers["x-api-key"] = apiKey;
+    headers["anthropic-version"] = "2023-06-01";
+    headers["anthropic-dangerous-direct-browser-access"] = "true";
+  } else {
+    headers.Authorization = `Bearer ${apiKey}`;
+  }
+
   const controller = new AbortController();
   const timer = window.setTimeout(() => controller.abort(), timeoutMs);
   try {
     const response = await fetch(endpoint, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
+      headers,
       body: JSON.stringify(payload),
       signal: controller.signal,
       credentials: "omit",
@@ -274,20 +290,93 @@ async function sendAiRequest(
   }
 }
 
-async function chatCompletion(
+function requestPayload(
+  config: AiConfig,
+  messages: ChatMessage[],
+  maxTokens: number,
+): Record<string, unknown> {
+  if (config.protocol === "openai-chat") {
+    return { model: config.model, messages };
+  }
+
+  const system = messages
+    .filter((message) => message.role === "system")
+    .map((message) => message.content)
+    .join("\n\n");
+  const userMessages = messages.filter((message) => message.role === "user");
+  if (config.protocol === "anthropic-messages") {
+    return {
+      model: config.model,
+      max_tokens: maxTokens,
+      system: system || undefined,
+      messages: userMessages,
+    };
+  }
+  return {
+    model: config.model,
+    max_output_tokens: maxTokens,
+    instructions: system || undefined,
+    input: userMessages,
+  };
+}
+
+function textBlocks(value: unknown): string {
+  if (!Array.isArray(value)) return "";
+  return value
+    .map((block) => {
+      if (!block || typeof block !== "object") return "";
+      const text = (block as { text?: unknown }).text;
+      return typeof text === "string" ? text : "";
+    })
+    .join("");
+}
+
+function responseText(protocol: AiProtocol, body: unknown): string {
+  if (!body || typeof body !== "object") return "";
+  if (protocol === "anthropic-messages") {
+    return textBlocks((body as { content?: unknown }).content);
+  }
+  if (protocol === "openai-chat") {
+    const content = (
+      body as { choices?: { message?: { content?: unknown } }[] }
+    ).choices?.[0]?.message?.content;
+    return typeof content === "string" ? content : textBlocks(content);
+  }
+
+  const outputText = (body as { output_text?: unknown }).output_text;
+  if (typeof outputText === "string") return outputText;
+  const output = (body as { output?: unknown }).output;
+  if (!Array.isArray(output)) return "";
+  return output
+    .map((item) => {
+      if (!item || typeof item !== "object") return "";
+      if ((item as { type?: unknown }).type !== "message") return "";
+      return textBlocks((item as { content?: unknown }).content);
+    })
+    .join("");
+}
+
+async function complete(
   config: AiConfig,
   messages: ChatMessage[],
   timeoutMs: number,
+  maxTokens: number,
 ): Promise<string> {
   if (!isAiConfigured(config)) {
     throw new Error("尚未配置 AI，请先在 AI 设置中填写 API Key");
   }
   const endpoint = new URL(normalizeBaseUrl(config.baseUrl));
-  endpoint.pathname = `${endpoint.pathname.replace(/\/$/, "")}/chat/completions`;
+  const basePath = endpoint.pathname.replace(/\/$/, "");
+  const endpointPath =
+    config.protocol === "anthropic-messages" && !basePath.endsWith("/v1")
+      ? "/v1/messages"
+      : AI_PROTOCOL_META[config.protocol].endpointPath;
+  endpoint.pathname = `${basePath}${endpointPath}`;
   const response = await sendAiRequest(
     endpoint.href,
     config.apiKey,
-    { model: config.model, messages },
+    config.protocol,
+    requestPayload(config, messages, maxTokens),
     timeoutMs,
   );
   let body: unknown = null;
@@ -297,18 +386,26 @@ async function chatCompletion(
     body = null;
   }
   if (response.status < 200 || response.status >= 300) {
-    const errObj = (body as { error?: { message?: unknown } } | null)?.error;
-    const detail =
-      typeof errObj?.message === "string"
-        ? errObj.message.replaceAll(config.apiKey, "[已隐藏]")
-        : "";
-    throw new Error(httpErrorMessage(response.status, detail));
+    const errObj = (body as { error?: { message?: unknown } | string } | null)
+      ?.error;
+    const message =
+      typeof errObj === "string"
+        ? errObj
+        : typeof errObj?.message === "string"
+          ? errObj.message
+          : "";
+    throw new Error(
+      httpErrorMessage(
+        response.status,
+        message.replaceAll(config.apiKey, "[已隐藏]"),
+      ),
+    );
   }
-  const content = (
-    body as { choices?: { message?: { content?: unknown } }[] } | null
-  )?.choices?.[0]?.message?.content;
-  if (typeof content !== "string" || !content.trim()) {
-    throw new Error("AI 返回了空的或无法识别的回复，请检查接口是否兼容 OpenAI");
+  const content = responseText(config.protocol, body);
+  if (!content.trim()) {
+    throw new Error(
+      `AI 返回了空的或无法识别的回复，请检查接口是否兼容 ${AI_PROTOCOL_META[config.protocol].label}`,
+    );
   }
   return content;
 }
@@ -321,13 +418,14 @@ export async function analyzeText(
 ): Promise<AiSuggestion[]> {
   const input = text.trim();
   if (!input) throw new Error("请先粘贴或输入要整理的内容");
-  const content = await chatCompletion(
+  const content = await complete(
     config,
     [
       { role: "system", content: systemPrompt(today) },
       { role: "user", content: input.slice(0, 12000) },
     ],
     60_000,
+    4096,
   );
   return toSuggestions(extractJson(content), today);
 }
@@ -337,10 +435,11 @@ export async function testConnection(
   config: AiConfig,
 ): Promise<ConnectionResult> {
   try {
-    await chatCompletion(
+    await complete(
       config,
       [{ role: "user", content: "请只回复：OK" }],
       20_000,
+      64,
     );
     return { ok: true, model: config.model };
   } catch (err) {
