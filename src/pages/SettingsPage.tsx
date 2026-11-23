@@ -24,7 +24,7 @@ export default function SettingsPage() {
         </p>
         <p
           data-ocid="settings.local_storage.badge"
-          className="pill-success mt-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium"
+          className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
         >
           <ShieldCheck className="h-3.5 w-3.5" aria-hidden />
           所有配置仅保存在本机
@@ -33,10 +33,10 @@ export default function SettingsPage() {
 
       <div
         data-ocid="settings.status.card"
-        className="ai-border flex items-center gap-4 rounded-2xl p-5 shadow-card"
+        className="surface-card flex items-center gap-4 p-5"
       >
-        <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-aurora text-primary-foreground shadow-glow-ai">
-          <Sparkles className="h-5 w-5" aria-hidden />
+        <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          <Sparkles className="h-[18px] w-[18px]" aria-hidden />
         </span>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">

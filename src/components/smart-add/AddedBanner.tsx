@@ -12,7 +12,7 @@ export function AddedBanner({ count, onDismiss }: AddedBannerProps) {
     <div
       aria-live="polite"
       data-ocid="smart_add.success_state"
-      className="surface-card flex flex-wrap items-center gap-3 border-primary/30 px-5 py-4 shadow-glow animate-scale-in"
+      className="surface-card flex flex-wrap items-center gap-3 border-primary/30 px-5 py-4 animate-scale-in"
     >
       <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/15 text-primary">
         <CircleCheckBig className="h-5 w-5 animate-check-pop" aria-hidden />
@@ -29,7 +29,7 @@ export function AddedBanner({ count, onDismiss }: AddedBannerProps) {
         to="/"
         search={{ view: "all" }}
         data-ocid="smart_add.tasks.link"
-        className="focus-ring inline-flex h-10 items-center gap-2 rounded-full bg-primary px-5 text-sm font-semibold text-primary-foreground transition-smooth hover:shadow-glow active:scale-95"
+        className="focus-ring inline-flex h-10 items-center gap-2 rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground transition-smooth hover:shadow-subtle active:scale-95"
       >
         查看任务清单
         <ArrowRight className="h-4 w-4" aria-hidden />

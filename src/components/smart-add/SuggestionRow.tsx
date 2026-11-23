@@ -1,7 +1,6 @@
 import { DateField } from "@/components/tasks/DateField";
 import { PrioritySelect } from "@/components/tasks/PrioritySelect";
 import { Checkbox } from "@/components/ui/checkbox";
-import { PRIORITY_META } from "@/lib/tasks";
 import { TASK_NOTE_MAX_LENGTH, TASK_TITLE_MAX_LENGTH } from "@/types";
 import { Trash2 } from "lucide-react";
 import { useId } from "react";
@@ -27,8 +26,6 @@ export function SuggestionRow({
   const noteId = useId();
   const ocid = `smart_add.suggestion.${index}`;
   const emptyTitle = item.title.trim().length === 0;
-  const meta = PRIORITY_META[item.priority];
-
   return (
     <li
       data-ocid={`smart_add.suggestion.item.${index}`}
@@ -39,12 +36,6 @@ export function SuggestionRow({
       }`}
       style={{ animationDelay: `${Math.min(index - 1, 8) * 45}ms` }}
     >
-      <span
-        aria-hidden
-        className={`absolute inset-y-3 left-0 w-1 rounded-r-full transition-smooth ${meta.dot} ${
-          item.checked ? "opacity-100" : "opacity-30"
-        }`}
-      />
       <div className="flex items-start gap-3">
         <div className="flex flex-col items-center gap-1.5 pt-2.5">
           <Checkbox
@@ -72,15 +63,13 @@ export function SuggestionRow({
               aria-invalid={emptyTitle}
               placeholder="任务标题"
               className={`focus-ring h-10 min-w-0 flex-1 rounded-lg border border-transparent bg-transparent px-2 text-base font-semibold transition-smooth placeholder:font-normal placeholder:text-muted-foreground hover:border-border focus:border-input focus:bg-background ${
-                item.checked
-                  ? "text-foreground"
-                  : "text-muted-foreground line-through decoration-1"
+                item.checked ? "text-foreground" : "text-muted-foreground"
               }`}
             />
             <span
               data-ocid={`smart_add.suggestion.status.${index}`}
-              className={`hidden shrink-0 rounded-full px-2.5 py-1 text-[11px] font-semibold sm:inline-flex ${
-                item.checked ? "pill-success" : "pill-date-neutral"
+              className={`hidden shrink-0 rounded-full px-2.5 py-1 text-[11px] font-medium sm:inline-flex ${
+                item.checked ? "text-primary" : "text-muted-foreground"
               }`}
             >
               {item.checked ? "将添加" : "已跳过"}

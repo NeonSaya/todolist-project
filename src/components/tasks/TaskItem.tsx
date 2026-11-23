@@ -63,7 +63,7 @@ export function TaskItem({
 
   return (
     <div
-      className={`group relative flex items-start gap-3 overflow-hidden rounded-2xl border px-3.5 py-3 transition-smooth md:px-4 ${
+      className={`group relative flex items-start gap-3 overflow-hidden rounded-xl border px-3.5 py-3 transition-smooth md:px-4 ${
         done
           ? "border-border bg-muted/60 shadow-none"
           : "surface-card surface-card-hover"

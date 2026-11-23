@@ -85,7 +85,7 @@ export function QuickAddForm({ view, today, inputRef }: QuickAddFormProps) {
     <form
       onSubmit={handleSubmit}
       data-ocid="tasks.add.panel"
-      className="surface-card group/add p-1.5 transition-smooth focus-within:-translate-y-px focus-within:border-primary/40 focus-within:shadow-glow motion-safe:animate-fade-up"
+      className="surface-card group/add p-1.5 transition-smooth focus-within:-translate-y-px focus-within:border-primary/40 focus-within:shadow-xs motion-safe:animate-fade-up"
     >
       <fieldset disabled={createTask.isPending} className="min-w-0">
         <div className="flex items-center gap-2.5 pl-2.5 pr-1.5">
@@ -111,7 +111,7 @@ export function QuickAddForm({ view, today, inputRef }: QuickAddFormProps) {
           <Link
             to="/smart-add"
             data-ocid="tasks.add.smart_add.link"
-            className="focus-ring group/ai ai-border inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full px-3 text-xs font-semibold transition-smooth hover:shadow-glow-ai active:scale-95"
+            className="focus-ring group/ai ai-border inline-flex h-8 shrink-0 items-center gap-1.5 rounded-full px-3 text-xs font-semibold transition-smooth hover:shadow-xs active:scale-95"
           >
             <Sparkles
               className="h-3.5 w-3.5 text-accent transition-smooth group-hover/ai:rotate-12"
@@ -168,7 +168,7 @@ export function QuickAddForm({ view, today, inputRef }: QuickAddFormProps) {
             type="submit"
             data-ocid="tasks.add.submit_button"
             disabled={createTask.isPending}
-            className="ml-auto h-9 rounded-full px-4 font-semibold transition-smooth hover:-translate-y-px hover:shadow-glow active:translate-y-0 active:scale-95"
+            className="ml-auto h-9 rounded-lg px-4 font-semibold transition-smooth hover:-translate-y-px hover:shadow-subtle active:translate-y-0 active:scale-95"
           >
             {createTask.isPending ? (
               <Loader2 className="h-4 w-4 animate-spin" aria-hidden />

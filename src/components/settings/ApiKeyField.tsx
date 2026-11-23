@@ -50,7 +50,7 @@ export function ApiKeyField({ value, onChange }: ApiKeyFieldProps) {
       <div
         id="ai-api-key-privacy"
         data-ocid="settings.api_key.privacy_panel"
-        className="bg-success-soft flex items-start gap-2.5 rounded-xl border border-success/25 px-3.5 py-3 transition-theme"
+        className="flex items-start gap-2.5 rounded-xl border border-success/20 bg-success-soft px-3.5 py-3 transition-theme"
       >
         <ShieldCheck
           className="mt-0.5 h-4 w-4 shrink-0 text-success"

@@ -97,15 +97,10 @@ function StateIllustration({
     >
       <span className={`absolute inset-0 rounded-full ${halo}`} />
       <span
-        className={`absolute inset-3 rounded-full ${halo} motion-safe:animate-pulse`}
-      />
-      <span
-        className={`relative flex h-14 w-14 rotate-[-6deg] items-center justify-center rounded-2xl border border-border shadow-card ${core}`}
+        className={`relative flex h-14 w-14 items-center justify-center rounded-2xl border border-border shadow-card ${core}`}
       >
         {icon}
       </span>
-      <span className="absolute right-2 top-3 h-2 w-2 rounded-full bg-accent/60" />
-      <span className="absolute bottom-4 left-1.5 h-1.5 w-1.5 rounded-full bg-primary/50" />
     </div>
   );
 }
@@ -137,7 +132,7 @@ export function TasksError({
         data-ocid="tasks.retry_button"
         onClick={onRetry}
         disabled={retrying}
-        className="mt-6 rounded-full px-5 font-semibold transition-smooth hover:-translate-y-px hover:shadow-glow active:translate-y-0 active:scale-95"
+        className="mt-6 rounded-lg px-5 font-semibold transition-smooth hover:-translate-y-px hover:shadow-subtle active:translate-y-0 active:scale-95"
       >
         <RotateCw
           className={`h-4 w-4 ${retrying ? "animate-spin" : ""}`}
@@ -226,7 +221,7 @@ export function TasksEmpty({
           type="button"
           data-ocid="tasks.empty.primary_button"
           onClick={onFocusAdd}
-          className="mt-6 rounded-full px-5 font-semibold transition-smooth hover:-translate-y-px hover:shadow-glow active:translate-y-0 active:scale-95"
+          className="mt-6 rounded-lg px-5 font-semibold transition-smooth hover:-translate-y-px hover:shadow-subtle active:translate-y-0 active:scale-95"
         >
           {e.action}
         </Button>

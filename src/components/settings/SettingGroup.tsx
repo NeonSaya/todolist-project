@@ -29,7 +29,7 @@ export function SettingGroup({
           <Icon className="h-4 w-4" aria-hidden />
         </span>
         <div className="min-w-0">
-          <p className="tabular font-mono text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+          <p className="tabular font-mono text-[11px] font-medium text-muted-foreground">
             步骤 0{step}
           </p>
           <h2

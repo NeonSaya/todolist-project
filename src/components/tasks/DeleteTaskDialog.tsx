@@ -66,7 +66,7 @@ export function DeleteTaskDialog({ task, onClose }: DeleteTaskDialogProps) {
             data-ocid="tasks.delete.confirm_button"
             disabled={deleteTask.isPending}
             onClick={confirm}
-            className="rounded-full px-5 font-semibold transition-smooth hover:-translate-y-px hover:shadow-elevated active:translate-y-0 active:scale-95"
+            className="rounded-lg px-5 font-semibold transition-smooth hover:-translate-y-px hover:shadow-subtle active:translate-y-0 active:scale-95"
           >
             {deleteTask.isPending && (
               <Loader2 className="h-4 w-4 animate-spin" aria-hidden />

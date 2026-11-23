@@ -110,7 +110,7 @@ export function MobileBottomNav({
         className="focus-ring flex min-h-14 flex-col items-center justify-end gap-1 rounded-xl pb-1.5 text-[11px] font-semibold transition-smooth active:scale-95"
       >
         <span
-          className={`bg-gradient-aurora -mt-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl text-accent-foreground ring-4 ring-background transition-smooth ${onSmartAdd ? "shadow-glow-ai" : "shadow-elevated"}`}
+          className={`bg-primary -mt-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl text-primary-foreground ring-4 ring-background transition-smooth ${onSmartAdd ? "shadow-subtle" : "shadow-elevated"}`}
         >
           <Sparkles className="h-5 w-5" aria-hidden />
         </span>

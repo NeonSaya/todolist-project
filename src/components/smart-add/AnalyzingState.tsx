@@ -2,7 +2,7 @@ import { Sparkles } from "lucide-react";
 
 const ROWS = ["analyzing-1", "analyzing-2", "analyzing-3"];
 
-/** Aurora shimmer shown while the model reads the pasted text. */
+/** Quiet progress state while the configured model reviews pasted text. */
 export function AnalyzingState() {
   return (
     <section
@@ -12,18 +12,12 @@ export function AnalyzingState() {
       className="surface-glass overflow-hidden p-5 animate-scale-in"
     >
       <div className="flex items-center gap-3">
-        <span className="relative inline-flex h-10 w-10 items-center justify-center">
-          <span
-            className="bg-gradient-aurora absolute inset-0 animate-glow-pulse rounded-xl blur-md"
-            aria-hidden
-          />
-          <span className="bg-gradient-aurora relative inline-flex h-10 w-10 items-center justify-center rounded-xl text-accent-foreground shadow-glow-ai">
-            <Sparkles className="h-4 w-4 animate-pulse" aria-hidden />
-          </span>
+        <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          <Sparkles className="h-4 w-4" aria-hidden />
         </span>
         <div>
           <p className="text-sm font-semibold text-foreground">
-            <span className="text-gradient-aurora">AI 正在阅读并拆分任务</span>
+            AI 正在阅读并拆分任务
           </p>
           <p className="text-xs text-muted-foreground">
             识别待办、换算日期、判断轻重缓急，通常需要几秒钟…

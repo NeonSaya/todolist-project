@@ -35,12 +35,8 @@ export function SmartAddComposer({
     <form
       onSubmit={handleSubmit}
       data-ocid="smart_add.composer.panel"
-      className="ai-border relative overflow-hidden rounded-2xl shadow-card transition-smooth focus-within:shadow-glow-ai"
+      className="surface-card overflow-hidden focus-within:border-primary/40 focus-within:shadow-xs"
     >
-      <div
-        className="bg-gradient-aurora pointer-events-none absolute -top-24 right-0 h-48 w-2/3 animate-aurora rounded-full opacity-[0.12] blur-3xl"
-        aria-hidden
-      />
       <label htmlFor={textareaId} className="sr-only">
         要整理的文字
       </label>
@@ -78,7 +74,7 @@ export function SmartAddComposer({
               variant="ghost"
               data-ocid="smart_add.clear_button"
               onClick={() => onTextChange("")}
-              className="h-10 rounded-full px-4 text-muted-foreground transition-smooth hover:text-foreground"
+              className="h-10 rounded-lg px-4 text-muted-foreground transition-smooth hover:text-foreground"
             >
               清空
             </Button>
@@ -88,7 +84,7 @@ export function SmartAddComposer({
             data-ocid="smart_add.analyze.primary_button"
             disabled={analyzing || empty}
             title={empty ? "请先粘贴或输入内容" : undefined}
-            className="bg-gradient-aurora h-10 rounded-full px-6 font-semibold text-accent-foreground shadow-glow-ai transition-smooth hover:-translate-y-px hover:shadow-elevated active:scale-95 disabled:opacity-50 disabled:shadow-none"
+            className="h-10 rounded-xl px-6 font-semibold shadow-xs transition-smooth hover:-translate-y-px hover:shadow-elevated active:scale-95 disabled:opacity-50 disabled:shadow-none"
           >
             {analyzing ? (
               <Loader2 className="h-4 w-4 animate-spin" aria-hidden />

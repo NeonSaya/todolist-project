@@ -182,7 +182,7 @@ function EditForm({
           variant="ghost"
           data-ocid="tasks.edit.delete_button"
           onClick={() => onRequestDelete(task)}
-          className="mr-auto rounded-full text-destructive transition-smooth hover:bg-destructive/10 hover:text-destructive"
+          className="mr-auto rounded-lg text-destructive transition-smooth hover:bg-destructive/10 hover:text-destructive"
         >
           <Trash2 className="h-4 w-4" aria-hidden />
           删除
@@ -193,7 +193,7 @@ function EditForm({
             variant="outline"
             data-ocid="tasks.edit.cancel_button"
             onClick={onClose}
-            className="rounded-full transition-smooth active:scale-95"
+            className="rounded-lg transition-smooth active:scale-95"
           >
             取消
           </Button>
@@ -201,7 +201,7 @@ function EditForm({
             type="submit"
             data-ocid="tasks.edit.save_button"
             disabled={updateTask.isPending}
-            className="rounded-full px-5 font-semibold transition-smooth hover:-translate-y-px hover:shadow-glow active:translate-y-0 active:scale-95"
+            className="rounded-lg px-5 font-semibold transition-smooth hover:-translate-y-px hover:shadow-subtle active:translate-y-0 active:scale-95"
           >
             {updateTask.isPending && (
               <Loader2 className="h-4 w-4 animate-spin" aria-hidden />

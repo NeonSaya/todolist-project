@@ -82,9 +82,9 @@ export function Sidebar({ counts }: { counts: Record<TaskView, number> }) {
           to="/smart-add"
           data-ocid="nav.smart_add.link"
           aria-current={onSmartAdd ? "page" : undefined}
-          className={`focus-ring ai-border group relative flex items-center gap-3 rounded-xl px-3 py-2.5 transition-smooth hover:-translate-y-px hover:shadow-glow-ai active:scale-[0.98] ${onSmartAdd ? "shadow-glow-ai" : "shadow-xs"}`}
+          className={`focus-ring ai-border group relative flex items-center gap-3 rounded-xl px-3 py-2.5 transition-smooth hover:-translate-y-px hover:shadow-subtle active:scale-[0.98] ${onSmartAdd ? "shadow-subtle" : "shadow-xs"}`}
         >
-          <span className="bg-gradient-aurora inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-accent-foreground">
+          <span className="bg-gradient-aurora inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-primary-foreground">
             <Sparkles className="h-4 w-4" aria-hidden />
           </span>
           <span className="min-w-0 flex-1 leading-tight">
@@ -96,7 +96,7 @@ export function Sidebar({ counts }: { counts: Record<TaskView, number> }) {
             </span>
           </span>
           <ArrowUpRight
-            className="h-4 w-4 shrink-0 text-accent opacity-50 transition-smooth group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100"
+            className="h-4 w-4 shrink-0 text-muted-foreground opacity-60 transition-smooth group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100"
             aria-hidden
           />
         </Link>

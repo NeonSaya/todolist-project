@@ -98,11 +98,11 @@ export default function SmartAddPage() {
     <section data-ocid="smart_add.page" className="space-y-6 pb-10">
       <header className="animate-fade-up">
         <div className="flex items-center gap-3">
-          <span className="bg-gradient-aurora inline-flex h-10 w-10 items-center justify-center rounded-xl text-accent-foreground shadow-glow-ai">
-            <Sparkles className="h-5 w-5" aria-hidden />
+          <span className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+            <Sparkles className="h-[18px] w-[18px]" aria-hidden />
           </span>
           <h1 className="font-display text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-            <span className="text-gradient-aurora">智能添加</span>
+            智能添加
           </h1>
         </div>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">

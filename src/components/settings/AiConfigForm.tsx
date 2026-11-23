@@ -201,7 +201,7 @@ export function AiConfigForm() {
             data-ocid="settings.test.secondary_button"
             disabled={testing || keyMissing}
             onClick={handleTest}
-            className="h-10 rounded-full transition-smooth"
+            className="h-10 rounded-lg transition-smooth"
           >
             {testing ? (
               <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
@@ -213,7 +213,7 @@ export function AiConfigForm() {
           <Button
             type="submit"
             data-ocid="settings.save_button"
-            className="h-10 rounded-full bg-gradient-primary px-6 font-semibold text-primary-foreground shadow-glow transition-smooth hover:brightness-110 active:scale-[0.98]"
+            className="h-10 rounded-lg px-6 font-semibold shadow-xs transition-smooth hover:-translate-y-px hover:shadow-subtle active:translate-y-0 active:scale-[0.98]"
           >
             <Save className="h-4 w-4" aria-hidden />
             保存

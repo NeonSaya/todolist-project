@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>拾序标识</title>
+  <rect width="64" height="64" rx="16" fill="#1b6245" />
+  <path
+    d="M13 46h15V35h13V24h10"
+    fill="none"
+    stroke="#f7fff9"
+    stroke-width="5.6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

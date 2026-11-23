@@ -37,8 +37,8 @@ export function SuggestionReview({
       aria-labelledby="smart-add-review-heading"
       className="space-y-3 animate-fade-up"
     >
-      <p className="flex items-center gap-2 px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-        <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-secondary text-[11px] text-secondary-foreground">
+      <p className="flex items-center gap-2 px-1 text-xs font-semibold text-muted-foreground">
+        <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 text-[11px] text-primary">
           2
         </span>
         确认建议 · 勾选要保留的任务，可直接修改标题、优先级与日期
@@ -86,7 +86,7 @@ export function SuggestionReview({
             onClick={onDiscard}
             disabled={saving}
             title="丢弃全部建议，粘贴的内容会保留"
-            className="h-10 rounded-full px-4 text-muted-foreground transition-smooth hover:bg-destructive/10 hover:text-destructive"
+            className="h-10 rounded-lg px-4 text-muted-foreground transition-smooth hover:bg-destructive/10 hover:text-destructive"
           >
             <X className="h-4 w-4" aria-hidden />
             放弃
@@ -97,7 +97,7 @@ export function SuggestionReview({
             onClick={onConfirm}
             disabled={saving || addable === 0}
             title={addable === 0 ? "请至少勾选一条有标题的任务" : undefined}
-            className="h-10 rounded-full px-5 font-semibold shadow-subtle transition-smooth hover:shadow-glow active:scale-95"
+            className="h-10 rounded-xl px-5 font-semibold shadow-xs transition-smooth hover:shadow-subtle active:scale-95"
           >
             {saving ? (
               <Loader2 className="h-4 w-4 animate-spin" aria-hidden />
