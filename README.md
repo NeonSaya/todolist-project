@@ -2,13 +2,13 @@
 
 > 把纷乱拾成秩序
 
-拾序是一款打开即用的中文待办清单。你可以按日期和优先级安排工作与生活，也可以连接自己的 AI 服务，把聊天记录、会议纪要或随手记下的文字整理成待办。
+拾序是一款打开即用的中文待办清单：按日期和优先级安排事情，也能接入自己配置的 AI 服务，把聊天记录、会议纪要或随手写下的文字整理成待办。
 
 ## 快速开始
 
 ### 运行网页版
 
-准备 Node.js 20.19 或更高的 20.x 版本，或 Node.js 22.12 及以上版本。项目使用 pnpm 10，锁定版本为 `10.26.1`。[Vite 环境要求](https://vite.dev/guide/#scaffolding-your-first-vite-project)
+网页版需要 Node.js 20.19 及以上的 20.x 版本，或 Node.js 22.12 及以上版本（[Vite 环境要求](https://vite.dev/guide/#scaffolding-your-first-vite-project)）。项目使用 pnpm 10，版本锁定在 `10.26.1`。
 
 ```sh
 git clone https://github.com/NeonSaya/todolist-project.git
@@ -17,57 +17,57 @@ pnpm install --frozen-lockfile
 pnpm dev
 ```
 
-在浏览器打开终端显示的本地地址。
+在浏览器打开终端里显示的本地地址。
 
 ### 安装 Windows 桌面版
 
-从源码构建桌面版时，先按上文安装项目依赖。Windows 构建还需要 Rust MSVC 工具链、Microsoft C++ Build Tools 的「使用 C++ 的桌面开发」工作负载和 Microsoft Edge WebView2。需要调试桌面版时，在仓库根目录执行 `pnpm desktop dev`。[Tauri Windows 开发环境](https://v2.tauri.app/start/prerequisites/#windows)
+桌面版从源码构建。先按上文安装项目依赖；Windows 上还需要 Rust MSVC 工具链、Microsoft C++ Build Tools 的「使用 C++ 的桌面开发」工作负载，以及 Microsoft Edge WebView2，详见 [Tauri Windows 开发环境](https://v2.tauri.app/start/prerequisites/#windows)。
 
-在仓库根目录运行以下命令生成安装包。
+调试桌面版时，在仓库根目录运行 `pnpm desktop dev`。生成安装包运行：
 
 ```sh
 pnpm desktop build
 ```
 
-在 Windows x64 上，默认生成的安装包为 `src-tauri/target/release/bundle/nsis/拾序_<版本>_x64-setup.exe`。双击安装后，在开始菜单搜索「拾序」。如果系统缺少 WebView2，安装程序会联网下载运行时。[WebView2 安装说明](https://v2.tauri.app/distribute/windows-installer/#webview2-installation-options)
+Windows x64 上的安装包生成在 `src-tauri/target/release/bundle/nsis/拾序_<版本>_x64-setup.exe`。双击安装，然后从开始菜单打开「拾序」。系统缺少 WebView2 时，安装程序会联网下载运行时，见 [WebView2 安装说明](https://v2.tauri.app/distribute/windows-installer/#webview2-installation-options)。
 
 ## 管理任务
 
-首次打开本地清单时，拾序会添加一组示例任务，方便熟悉各个日期视图。
+第一次打开清单时，拾序会添加一组示例任务，覆盖今天、逾期和之后几天，方便熟悉各个日期视图。
 
-创建任务时，输入标题，选择日期和高、中、低优先级，还可以补充备注。点击 **添加** 或按 `Enter` 保存。点击任务标题可以编辑。标记完成后可通过提示撤销，也可以在 **已完成** 视图把任务改回未完成。
+新建任务时填写标题，选择日期和优先级（高、中、低），需要时补一句备注，然后点 **添加** 或按 `Enter` 保存。点任务标题可以编辑。标记完成后，可以在提示里点 **撤销** 恢复，也可以到 **已完成** 视图把任务改回未完成。
 
 | 视图 | 显示内容 |
 | --- | --- |
-| 今天 | 日期为今天的任务，以及今日完成进度 |
-| 即将到来 | 日期在今天之后的未完成任务 |
-| 已逾期 | 日期早于今天的未完成任务 |
-| 全部 | 所有任务，包括无日期任务，按进行中和已完成分组 |
-| 已完成 | 已完成的任务，最近完成的排在前面 |
+| 今天 | 今天的任务和完成进度 |
+| 即将到来 | 日期在今天之后、尚未完成的任务 |
+| 已逾期 | 日期已过、尚未完成的任务 |
+| 全部 | 所有任务（含无日期），分进行中和已完成 |
+| 已完成 | 已完成的任务，最近完成的在前 |
 
-界面默认跟随系统主题。手动选择浅色或深色后，下次打开会继续使用该设置。
+界面默认跟随系统主题。手动选择浅色、深色或跟随系统后，下次打开会沿用这个选择。
 
 ## 用 AI 整理待办
 
-1. 打开 **AI 设置**，填写服务商的 OpenAI 兼容 **Base URL**、**API Key** 和**模型名称**。
-2. 点击 **测试连接**，确认服务能够响应后点击 **保存**。
-3. 打开 **智能添加**，粘贴要整理的文字，点击 **分析** 或按 `Ctrl + Enter`。在 macOS 网页中也可按 `⌘ + Enter`。
-4. 检查生成的标题、日期、优先级和备注，按需编辑，勾选要保留的建议后批量添加。
+1. 打开 **AI 设置**，填写 OpenAI 兼容服务的 **Base URL**、**API Key** 和**模型名称**。
+2. 点 **测试连接**，确认连接成功后点 **保存**。
+3. 打开 **智能添加**，粘贴要整理的文字，点 **分析**，或按 `Ctrl + Enter`；macOS 上也可以按 `⌘ + Enter`。
+4. 检查生成的标题、日期、优先级和备注，按需修改，勾选要保留的条目后批量添加。
 
-Base URL 填到服务商提供的接口前缀即可。拾序会追加 `/chat/completions`，粘贴完整请求地址时也会自动整理末尾路径。
+Base URL 填到服务商给出的接口前缀即可，拾序会补上 `/chat/completions`；直接粘贴完整请求地址时，末尾的这段路径也会被去掉。
 
 | 服务示例 | Base URL | 模型名称 |
 | --- | --- | --- |
 | OpenAI（界面默认值） | `https://api.openai.com/v1` | `gpt-4o-mini` |
 | DeepSeek | `https://api.deepseek.com` | `deepseek-flash` |
 
-模型名称以所选服务商提供的模型 ID 为准。[DeepSeek API 配置示例](https://api-docs.deepseek.com/quick_start/agent_integrations/)
+模型名称以服务商的模型 ID 为准，可参考 [DeepSeek API 文档](https://api-docs.deepseek.com/)。
 
 ## 数据与隐私
 
-Windows 版支持离线添加、编辑和完成任务，清单保存在应用 WebView 的 IndexedDB 中。网页版默认使用当前站点的 IndexedDB，两者各有一份本地清单。
+桌面版可以离线添加、编辑和完成任务，清单保存在应用 WebView 的 IndexedDB 里。网页版默认把清单保存在当前站点的 IndexedDB。两端各存一份，互不同步。
 
-AI 配置保存在当前浏览器或桌面 WebView 的本地存储中。测试连接和分析文字时，拾序会将 API Key 随请求发送给配置的服务商。分析请求还包含粘贴的文字。网页版使用跨域接口时，服务商需要允许该站点发起跨域请求。可在 **AI 设置** 中使用 **清除配置** 移除本地连接信息。
+AI 配置保存在当前浏览器或桌面 WebView 的本地存储中。测试连接和分析文字时，API Key 会随请求发送给配置的服务商，分析请求还包含粘贴的文字。网页版由浏览器直接请求接口，服务商需要允许该站点发起跨域请求；桌面版通过应用内的 Rust 侧发请求，不受浏览器跨域限制。要移除本地连接信息，在 **AI 设置** 中点 **清除配置**。
 
 ## 开发与测试
 
@@ -80,9 +80,9 @@ pnpm exec playwright install chromium --only-shell
 pnpm test
 ```
 
-`pnpm fix` 会应用 Biome 的自动修复。Playwright 用例覆盖任务增删改、跨午夜的日期视图、主题切换和 AI 整理流程。AI 用例使用模拟接口，可重复运行。
+`pnpm check` 运行 Biome 检查，`pnpm fix` 自动修复。Playwright 用例覆盖任务的增删改、跨过本地午夜的日期视图、主题切换和 AI 整理流程；AI 用例使用本地模拟接口，可以反复运行。
 
-`pnpm build` 将网页构建到 `dist/`，`pnpm exec vite preview` 可在本地预览构建结果。部署到静态站点时，将 `/smart-add` 和 `/settings` 等页面路由回退到 `index.html`，以支持直接访问和刷新。
+`pnpm build` 把网页构建到 `dist/`，`pnpm exec vite preview` 可以本地预览。部署到静态站点时，需要把 `/smart-add`、`/settings` 等路由回退到 `index.html`，直接访问和刷新才能正常工作。
 
 ## 项目结构
 
@@ -96,11 +96,11 @@ pnpm test
 | `tests/e2e/` | Playwright 端到端测试 |
 | `docs/` | 界面设计与视觉规范 |
 
-主题、色彩和界面组件的设计说明见 [设计文档](docs/design.md)。
+主题、色彩和组件规范见 [设计文档](docs/design.md)。
 
 ## 可选的 ICP 后端
 
-已有部署的 ICP Canister 时，可让网页版连接同一份匿名可读写的任务清单。在 `public/env.json` 填入实际的 Canister ID 和可选的接口地址。省略 `backend_host` 时使用 `https://icp-api.io`。
+如果已经部署了项目的 ICP Canister，可以让网页版连过去，共用同一份任务清单。这份清单对所有访客开放读写，没有登录，也没有权限隔离。在 `public/env.json` 填入 Canister ID 和可选的接口地址；省略 `backend_host` 时使用 `https://icp-api.io`。
 
 ```json
 {
@@ -109,9 +109,9 @@ pnpm test
 }
 ```
 
-构建后可在 `dist/env.json` 找到运行时配置。将网页配置设为 `{}` 时，应用使用当前浏览器的本地清单。
+构建后的运行配置在 `dist/env.json`。保持 `{}` 时，网页版使用当前浏览器的本地清单。
 
-维护后端需要 Mops CLI。编译器、Lintoko 和 PocketIC 的版本已在 `backend/mops.toml` 中固定。[Mops 构建文档](https://docs.mops.one/cli/mops-build)
+维护后端需要 Mops CLI，编译器、Lintoko 和 PocketIC 的版本都固定在 `backend/mops.toml` 里（[Mops 构建文档](https://docs.mops.one/cli/mops-build)）。
 
 ```sh
 cd backend
@@ -121,4 +121,4 @@ cd ..
 pnpm bindgen
 ```
 
-`mops check` 检查代码和状态迁移兼容性。`mops build` 在 `backend/dist/` 生成 Wasm 和 Candid 文件，并在 PocketIC 中进行本地安装验证。接口变更后，`pnpm bindgen` 根据构建出的 Candid 文件更新前端绑定。
+`mops check` 检查类型、lint 和状态迁移兼容性。`mops build` 在 `backend/dist/` 生成 Wasm 和 Candid 文件，并用 PocketIC 做一次本地安装验证。改过接口后，运行 `pnpm bindgen` 按新生成的 Candid 文件更新前端绑定。
