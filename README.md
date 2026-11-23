@@ -21,7 +21,9 @@ pnpm dev
 
 ### 安装 Windows 桌面版
 
-桌面版从源码构建。先按上文安装项目依赖；Windows 上还需要 Rust MSVC 工具链、Microsoft C++ Build Tools 的「使用 C++ 的桌面开发」工作负载，以及 Microsoft Edge WebView2，详见 [Tauri Windows 开发环境](https://v2.tauri.app/start/prerequisites/#windows)。
+从 [GitHub Releases](https://github.com/NeonSaya/todolist-project/releases) 下载最新的 x64 安装程序，双击安装后从开始菜单打开「拾序」。安装程序会为当前用户安装，并在系统缺少 WebView2 时联网下载运行时。
+
+也可以从源码构建。先按上文安装项目依赖；Windows 上还需要 Rust MSVC 工具链、Microsoft C++ Build Tools 的「使用 C++ 的桌面开发」工作负载，以及 Microsoft Edge WebView2，详见 [Tauri Windows 开发环境](https://v2.tauri.app/start/prerequisites/#windows)。
 
 调试桌面版时，在仓库根目录运行 `pnpm desktop dev`。生成安装包运行：
 

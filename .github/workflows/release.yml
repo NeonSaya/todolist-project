@@ -1,0 +1,63 @@
+name: Release Windows desktop app
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: desktop-release-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Build and publish Windows installer
+    runs-on: windows-latest
+
+    steps:
+      - name: Check out release tag
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.26.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust build output
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: "./src-tauri -> target"
+
+      - name: Build and publish Tauri app
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: "拾序 v__VERSION__"
+          releaseBody: |
+            拾序 Windows 独立版 v__VERSION__。
+
+            - 全新的晨瓷 / 夜航界面与桌面图标
+            - 离线任务管理，清单保存在本机
+            - 支持自定义 OpenAI 兼容服务
+
+            下载 `拾序_*_x64-setup.exe`，双击安装后从开始菜单打开。安装包目前未做代码签名，Windows SmartScreen 可能提示；可选择“更多信息”后继续运行。系统缺少 WebView2 时，安装程序会联网下载运行时。
+          releaseDraft: false
+          prerelease: false
+          args: --bundles nsis
