@@ -52,10 +52,7 @@ pnpm dev
 | 协议 | 服务示例 | Base URL | 模型名称 |
 | --- | --- | --- | --- |
 | OpenAI Responses | OpenAI | `https://api.openai.com/v1` | `gpt-4o-mini` |
-| OpenAI Responses | DeepSeek | `https://api.deepseek.com` | `deepseek-flash` |
 | Anthropic Messages | Anthropic | `https://api.anthropic.com/v1` | `claude-haiku-4-5` |
-| Anthropic Messages | DeepSeek | `https://api.deepseek.com/anthropic` | `deepseek-flash` |
-| OpenAI Chat Completions | OpenAI（界面默认值） | `https://api.openai.com/v1` | `gpt-4o-mini` |
 | OpenAI Chat Completions | DeepSeek | `https://api.deepseek.com` | `deepseek-flash` |
 
 Base URL 填到服务商给出的接口前缀即可。拾序会按所选协议补上 `/responses` 或 `/chat/completions`；Anthropic 补上 `/v1/messages`，已有 `/v1` 时只补 `/messages`。如果直接粘贴完整请求地址，末尾的对应路径会被去掉。旧版本保存的配置继续使用 Chat Completions，不需要重新填写。
