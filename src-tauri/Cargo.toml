@@ -1,6 +1,6 @@
 [package]
 name = "shixu"
-version = "0.1.0"
+version = "0.2.0"
 description = "拾序待办清单"
 edition = "2021"
 

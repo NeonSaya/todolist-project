@@ -51,9 +51,9 @@ jobs:
           releaseBody: |
             拾序 Windows 独立版 v__VERSION__。
 
-            - 全新的晨瓷 / 夜航界面与桌面图标
-            - 离线任务管理，清单保存在本机
-            - 支持自定义 OpenAI 兼容服务
+            - AI 设置可切换 OpenAI Responses、Anthropic Messages 和 OpenAI Chat Completions
+            - 新配置默认使用 OpenAI Chat Completions，旧配置无需重新填写
+            - 智能添加兼容 DeepSeek 的 Responses 与 Anthropic 接口
 
             下载 `Shixu_*_x64-setup.exe`，双击安装后从开始菜单打开。安装包目前未做代码签名，Windows SmartScreen 可能提示；可选择“更多信息”后继续运行。系统缺少 WebView2 时，安装程序会联网下载运行时。
           releaseDraft: false
