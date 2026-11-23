@@ -60,7 +60,7 @@ jobs:
           prerelease: false
           tauriScript: pnpm desktop
           args: --bundles nsis
-          releaseAssetNamePattern: "Shixu_[version]_[arch][setup][ext]"
+          assetNamePattern: "Shixu_[version]_[arch][setup][ext]"
 
       - name: Remove legacy release asset name
         if: github.ref_name == 'v0.1.0'
