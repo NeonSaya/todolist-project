@@ -10,7 +10,9 @@ async function loadWebStore(): Promise<TaskStore> {
   const config: {
     backend_canister_id?: unknown;
     backend_host?: unknown;
-  } | null = await fetch("/env.json", { cache: "no-cache" })
+  } | null = await fetch(`${import.meta.env.BASE_URL}env.json`, {
+    cache: "no-cache",
+  })
     .then((response) => (response.ok ? response.json() : null))
     .catch(() => null);
   const canisterId = configured(config?.backend_canister_id);

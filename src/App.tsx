@@ -42,6 +42,7 @@ const settingsRoute = createRoute({
 
 const router = createRouter({
   routeTree: rootRoute.addChildren([tasksRoute, smartAddRoute, settingsRoute]),
+  basepath: import.meta.env.BASE_URL.replace(/\/$/, "") || "/",
   history: import.meta.env.MODE === "desktop" ? createHashHistory() : undefined,
   defaultNotFoundComponent: () => (
     <Navigate to="/" search={{ view: "today" }} />
