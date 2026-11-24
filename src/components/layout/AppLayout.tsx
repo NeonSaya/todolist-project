@@ -18,7 +18,7 @@ export function AppLayout() {
 
       <div className="flex min-h-dvh flex-col md:pl-64">
         <main className="flex-1 px-4 pb-28 pt-6 md:px-10 md:pb-14 md:pt-12">
-          <div className="mx-auto w-full max-w-3xl">
+          <div className="w-full">
             <Outlet />
           </div>
         </main>
