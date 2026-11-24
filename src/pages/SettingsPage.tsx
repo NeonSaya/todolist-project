@@ -13,7 +13,7 @@ export default function SettingsPage() {
       initial={reduce ? false : { opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-      className="mx-auto max-w-2xl space-y-6"
+      className="space-y-6 md:space-y-8"
     >
       <header>
         <h1 className="text-3xl font-semibold text-foreground md:text-4xl">
